@@ -157,6 +157,7 @@
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="frame.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="hptext.cpp" />
     <ClCompile Include="outputname.cpp" />
     <ClCompile Include="pose.cpp" />
     <ClCompile Include="posemenu.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="fade.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="hptext.h" />
     <ClInclude Include="outputname.h" />
     <ClInclude Include="pose.h" />
     <ClInclude Include="posemenu.h" />

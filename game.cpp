@@ -27,6 +27,7 @@
 #include "inputname.h"
 #include "outputname.h"
 #include "pose.h"
+#include "hptext.h" 
 
 //マクロ定義
 
@@ -54,6 +55,8 @@ void InitGame(void)
 	InitPlayer();
 
 	InitPlayerEffect(); //プレイヤーエフェクト処理
+
+	InitHpText(); //HPの文字
 
 	InitHpBer(); //hpバーの初期化
 
@@ -130,6 +133,8 @@ void UninitGame(void)
 	UninitPlayer();
 
 	UninitPlayerEffect(); //プレイヤーエフェクトの終了処理
+
+	UninitHpText(); //HPの文字
 
 	UninitHpBer(); //hpバーの終了処理
 
@@ -215,6 +220,8 @@ void UpdateGame(void)
 			UpdatePlayer();
 
 			UpdatePlayerEffect(); //プレイヤーエフェクトの更新処理
+
+			UpdateHpText(); //HPの文字
 
 			UpdateHpBer(); //hpバーの更新処理
 
@@ -354,6 +361,8 @@ void DrawGame(void)
 	DrawEnergyBer();
 
 	//hpバーの描画処理
+
+    DrawHpText(); //HPの文字
 
 	DrawHpBer();
 

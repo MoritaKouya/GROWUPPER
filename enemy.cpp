@@ -357,7 +357,7 @@ void ActionType1(int nCnt)
 
 					sinf(g_aEnemy[nCnt].nAnglePlayer) * 5.0f, 0.0f)//Šp“x 
 
-				, 100
+				, 600
 
 				, ENEMY_BULLET_DAMAGE
 
