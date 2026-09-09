@@ -501,6 +501,5 @@ void CollisionPlayer(Bullet* pBullet)
 		HitPlayer(HIT_BULLET, pBullet->nDamage); //プレイヤーのヒット処理
 
 		pBullet->bUse = false; //球を使用していない状態にする
-
 	}
 }

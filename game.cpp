@@ -314,10 +314,6 @@ void DrawGame(void)
 
 	DrawBg();
 
-	//エフェクトの描画処理
-
-	DrawEffect();
-
 	//爆発の描画処理
 
 	DrawExplosion();
@@ -331,6 +327,8 @@ void DrawGame(void)
 	DrawBomb(); //ボム
 
 	//球の描画処理
+
+	DrawEffect(); //エフェクトの描画処理
 
 	DrawBullet();
 
