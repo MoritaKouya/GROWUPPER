@@ -161,6 +161,7 @@
     <ClCompile Include="pose.cpp" />
     <ClCompile Include="posemenu.cpp" />
     <ClCompile Include="posetext.cpp" />
+    <ClCompile Include="scoretxt.cpp" />
     <ClCompile Include="setararrow.cpp" />
     <ClCompile Include="hpber.cpp" />
     <ClCompile Include="imagefighter.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="pose.h" />
     <ClInclude Include="posemenu.h" />
     <ClInclude Include="posetext.h" />
+    <ClInclude Include="scoretxt.h" />
     <ClInclude Include="setarrow.h" />
     <ClInclude Include="hpber.h" />
     <ClInclude Include="imagefighter.h" />

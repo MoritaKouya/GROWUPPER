@@ -13,6 +13,7 @@
 #include "scorerank.h"
 #include "resultbg.h"
 #include "ranking.h"
+#include "scoretxt.h"
 
 //マクロ定義
 
@@ -74,6 +75,8 @@ void InitResult(void)
 
 	SetScore();
 
+	InitScoreText(); //スコアの文字
+
 	InitScoreRank(); //スコアランク
 
 	//ランキング画面の初期化処理
@@ -97,6 +100,8 @@ void UninitResult(void)
 	UninitResultBG();//リザルトの背景
 
 	UninitScore(); //スコア
+
+	UninitScoreText(); //スコアの文字
 
 	UninitScoreRank(); //スコアランク
 
@@ -169,6 +174,8 @@ void DrawResult(void)
 	case RESULTMODE_0: //リザルト画面の場合
 
 		DrawResultBG(); //リザルトの背景
+
+		DrawScoreText(); //スコアの文字
 
 		DrawScore(); //スコア
 

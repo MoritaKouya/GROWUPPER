@@ -310,6 +310,13 @@ void AddScore(int nValue)
 
 	g_nScore += nValue * 100 + rand()%10;
 
+	//最大値を超えたとき
+
+	if (100000000 <= g_nScore)
+	{
+		g_nScore = 99999999;
+	}
+
 	aTexU[0] = g_nScore / 10000000;
 
 	aTexU[1] = g_nScore % 10000000 / 1000000;
@@ -376,4 +383,12 @@ void AddScore(int nValue)
 int GetScore(void)
 {
 	return g_nScore;
+}
+
+//========================
+// スコアの獲得処理	
+//========================
+SCORETEXTURE GetScoreRank(void)
+{
+	return g_type;
 }

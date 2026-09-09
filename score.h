@@ -55,4 +55,6 @@ void AddScore(int nValue);
 
 int GetScore(void); 
 
+SCORETEXTURE GetScoreRank(void); //スコアランクの獲得処理
+
 #endif
