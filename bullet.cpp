@@ -432,20 +432,31 @@ void CollisionEnemy(Bullet* pBullet)
 		if (pEnemy->bUse == true)
 		{//敵が使用されている
 
-			if (pEnemy->pos.x - ENEMY_DIAGONAL <= pBullet->pos.x
+			//中心座標の距離（ｘ、ｙ）
 
-				&& pBullet->pos.x <= pEnemy->pos.x + ENEMY_DIAGONAL
+			float fDistance_x = pEnemy->pos.x - pBullet->pos.x, //距離ｘ
 
-				&& pEnemy->pos.y - ENEMY_DIAGONAL <= pBullet->pos.y
+				fDistance_y = pEnemy->pos.y - pBullet->pos.y; //距離y
 
-				&& pBullet->pos.y <= pEnemy->pos.y + ENEMY_DIAGONAL) //敵と弾が当たった
-			{
+			//二つの中心中心座標の距離の2乗
+
+			float fDistanceSquared = (fDistance_x * fDistance_x) + (fDistance_y * fDistance_y);
+
+			//２つの円の半径の合計
+
+			float fTotalRadius = (ENEMY_DIAGONAL + BULLET_SIZE); //半径の合計の長さ
+
+			if (fDistanceSquared <= fTotalRadius * fTotalRadius) //半径の合計の２乗より距離の２乗が小さい場合
+			{//敵とプレイヤーが当たった
+
+				//サウンド
+
+				PlaySound(SOUND_LABEL_SE_HIT);
+
 				HitEnemy(nCntEnemy, pBullet->nDamage); //敵のヒット処理
 
 				pBullet->bUse = false; //球を使用していない状態にする
-
 			}
-
 		}
 	}
 }
@@ -461,24 +472,31 @@ void CollisionBoss(Bullet* pBullet)
 
 	Player* pPlayer = GetPlayer();
 
-		if (pBoss->pos.x - BOSS_DIAGONAL <= pBullet->pos.x
+	//中心座標の距離（ｘ、ｙ）
 
-			&& pBullet->pos.x <= pBoss->pos.x + BOSS_DIAGONAL
+	float fDistance_x = pBoss->pos.x - pBullet->pos.x, //距離ｘ
 
-			&& pBoss->pos.y - BOSS_DIAGONAL <= pBullet->pos.y
+		fDistance_y = pBoss->pos.y - pBullet->pos.y; //距離y
 
-			&& pBullet->pos.y <= pBoss->pos.y + BOSS_DIAGONAL) //ボスと弾が当たった
-		{
-			//サウンド
+	//二つの中心中心座標の距離の2乗
 
-			PlaySound(SOUND_LABEL_SE_HIT);
+	float fDistanceSquared = (fDistance_x * fDistance_x) + (fDistance_y * fDistance_y);
 
-			HitBoss(pPlayer->nAttack); //ボスのヒット処理
+	//２つの円の半径の合計
 
-			pBullet->bUse = false; //球を使用していない状態にする
+	float fTotalRadius = (BOSS_DIAGONAL + BULLET_SIZE); //半径の合計の長さ
 
-		}
+	if (fDistanceSquared <= fTotalRadius * fTotalRadius) //半径の合計の２乗より距離の２乗が小さい場合
+	{//敵とプレイヤーが当たった
 
+		//サウンド
+
+		PlaySound(SOUND_LABEL_SE_HIT);
+
+		HitBoss(pPlayer->nAttack); //ボスのヒット処理
+
+		pBullet->bUse = false; //球を使用していない状態にする
+	}
 }
 
 //==================
@@ -488,17 +506,26 @@ void CollisionPlayer(Bullet* pBullet)
 {
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //プレイヤーの情報の先頭アドレスが代入される	
+	Player* pPlayer = GetPlayer(); //敵の情報の先頭アドレスが代入される
 
-	if (pPlayer->pos.x - PLAYER_DIAGONAL <= pBullet->pos.x
+	//中心座標の距離（ｘ、ｙ）
 
-		&& pBullet->pos.x <= pPlayer->pos.x + PLAYER_DIAGONAL
+	float fDistance_x = pPlayer->pos.x - pBullet->pos.x, //距離ｘ
 
-		&& pPlayer->pos.y - PLAYER_DIAGONAL <= pBullet->pos.y
+		fDistance_y = pPlayer->pos.y - pBullet->pos.y; //距離y
 
-		&& pBullet->pos.y <= pPlayer->pos.y + PLAYER_DIAGONAL) //プレイヤーと弾が当たった
-	{
-		HitPlayer(HIT_BULLET, pBullet->nDamage); //プレイヤーのヒット処理
+	//二つの中心中心座標の距離の2乗
+
+	float fDistanceSquared = (fDistance_x * fDistance_x) + (fDistance_y * fDistance_y);
+
+	//２つの円の半径の合計
+
+	float fTotalRadius = (ENEMY_DIAGONAL + BULLET_SIZE); //半径の合計の長さ
+
+	if (fDistanceSquared <= fTotalRadius * fTotalRadius) //半径の合計の２乗より距離の２乗が小さい場合
+	{//敵とプレイヤーが当たった
+
+		HitPlayer(HIT_ENEMY, pBullet->nDamage); //敵のヒット処理
 
 		pBullet->bUse = false; //球を使用していない状態にする
 	}
