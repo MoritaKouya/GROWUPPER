@@ -232,7 +232,7 @@ void SetScore()
 {
 	int aTexU[NUM_PLACE]; //各桁の数値を格納
 
-	g_posScore = D3DXVECTOR3((SCREEN_WIDTH / 2) - 175.0f, (SCREEN_HEIGHT / 4), 0.0f);
+	g_posScore = D3DXVECTOR3((SCREEN_WIDTH / 2) - 350.0f, (SCREEN_HEIGHT / 3), 0.0f);
 
 	aTexU[0] = g_nScore / 10000000;
 
@@ -260,27 +260,27 @@ void SetScore()
 	{
 		//頂点座標の設定
 
-		pVtx[0].pos.x = g_posScore.x + (nCntPlace * 50.0f) + sinf(-D3DX_PI * 0.75f) * 25.0f;
+		pVtx[0].pos.x = g_posScore.x + (nCntPlace * 100.0f) + sinf(-D3DX_PI * 0.75f) * 50.0f;
 
-		pVtx[0].pos.y = g_posScore.y + cosf(-D3DX_PI * 0.75f) * 50.0f;
+		pVtx[0].pos.y = g_posScore.y + cosf(-D3DX_PI * 0.75f) * 100.0f;
 
 		pVtx[0].pos.z = 0.0f;
 
-		pVtx[1].pos.x = g_posScore.x + (nCntPlace * 50.0f) + sinf(D3DX_PI * 0.75f) * 25.0f;
+		pVtx[1].pos.x = g_posScore.x + (nCntPlace * 100.0f) + sinf(D3DX_PI * 0.75f) * 50.0f;
 
-		pVtx[1].pos.y = g_posScore.y + cosf(D3DX_PI * 0.75f) * 50.0f;
+		pVtx[1].pos.y = g_posScore.y + cosf(D3DX_PI * 0.75f) * 100.0f;
 
 		pVtx[1].pos.z = 0.0f;
 
-		pVtx[2].pos.x = g_posScore.x + (nCntPlace * 50.0f) + sinf(-D3DX_PI * 0.25) * 25.0f;
+		pVtx[2].pos.x = g_posScore.x + (nCntPlace * 100.0f) + sinf(-D3DX_PI * 0.25) * 50.0f;
 
-		pVtx[2].pos.y = g_posScore.y + cosf(-D3DX_PI * 0.25) * 50.0f;
+		pVtx[2].pos.y = g_posScore.y + cosf(-D3DX_PI * 0.25) * 100.0f;
 
 		pVtx[2].pos.z = 0.0f;
 
-		pVtx[3].pos.x = g_posScore.x + (nCntPlace * 50.0f) + sinf(D3DX_PI * 0.25) * 25.0f;
+		pVtx[3].pos.x = g_posScore.x + (nCntPlace * 100.0f) + sinf(D3DX_PI * 0.25) * 50.0f;
 
-		pVtx[3].pos.y = g_posScore.y + cosf(D3DX_PI * 0.25) * 50.0f;
+		pVtx[3].pos.y = g_posScore.y + cosf(D3DX_PI * 0.25) * 100.0f;
 
 		//テクスチャ座標の設定
 

@@ -19,27 +19,11 @@ LPDIRECT3DTEXTURE9 g_pTextureScoreText = NULL;
 
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffScoreText = NULL;
 
-const char* g_aScoreTextTexture_Path[SCORE_MAX] =
-{
-	"Data/TEXTURE/SCORERANK/scorertext000.png",
-
-	"Data/TEXTURE/SCORERANK/scorertext001.png",
-
-	"Data/TEXTURE/SCORERANK/scorertext002.png",
-
-	"Data/TEXTURE/SCORERANK/scorertext003.png",
-
-}; //テクスチャのアドレスの構造体
-
 //=========================
 // スコアテキストの初期化処理
 //=========================
 void InitScoreText(void)
 {
-	//スコアランクを獲得
-
-	SCORETEXTURE ScoreRank = GetScoreRank();
-
 	//デバイスの獲得
 
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();
@@ -48,7 +32,7 @@ void InitScoreText(void)
 
 	D3DXCreateTextureFromFile(pDevice,
 
-		g_aScoreTextTexture_Path[ScoreRank], //テクスチャのファイル名
+		"Data/TEXTURE/SCORERANK/scorertext000.png",  //テクスチャのファイル名
 
 		&g_pTextureScoreText);
 

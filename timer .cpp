@@ -16,7 +16,7 @@
 
 #define MAX_LINES (1) //行数
 
-#define REMAINING_TIME (60 * 180) //タイムリミット
+#define REMAINING_TIME (60 * 3) //タイムリミット
 
 //グローバル変数
 

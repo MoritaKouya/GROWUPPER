@@ -9,11 +9,11 @@
 
 //É}ÉNÉçíËã`
 
-#define SCORERANK_POS (D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0.0f)) //à íu
+#define SCORERANK_POS (D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3 * 2, 0.0f)) //à íu
 
-#define SCORERANK_SIZE_X (300) //â°ÇÃîºåa
+#define SCORERANK_SIZE_X (450) //â°ÇÃîºåa
 
-#define SCORERANK_SIZE_Y (150) //ècÇÃîºåa
+#define SCORERANK_SIZE_Y (225) //ècÇÃîºåa
 
 #define SCORERANK_EX (10000000) //EXÇÃîÕàÕ
 
