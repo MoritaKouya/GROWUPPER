@@ -15,6 +15,12 @@
 
 #include "sound.h"
 
+#include "tutorialarrow.h"
+
+//マクロ定義
+
+#define TUTORIALINPUT_TIME_INTERVAL (30) //入力の間隔
+
 //テクスチャ番号の列挙型
 
 typedef enum
@@ -40,6 +46,8 @@ LPDIRECT3DTEXTURE9 g_apTextureTutorial[TUTORIAL_MAX]; //テクスチャへのポインタ
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffTutorial = NULL; //頂点バッファへのポインタ
 
 int g_Tex; //現在のテクスチャを代入する
+
+int g_TutorialInputCounter; //入力間隔のカウンター
 
 //ファイル名
 
@@ -141,6 +149,9 @@ void InitTutorial(void)
 
 	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
 
+	//各オブジェクトの初期化処理
+
+	InitTutorialArrow(); //矢印
 
 	//頂点バッファをアンロックする
 
@@ -174,6 +185,10 @@ void UninitTutorial(void)
 		g_pVtxBuffTutorial = NULL;
 	}
 
+	//各オブジェクトの終了処理
+
+	UninitTutorialArrow(); //矢印
+
 	//サウンドの停止
 
 	StopSound(SOUND_LABEL_BGM000); //再生したいサウンドを指定
@@ -190,43 +205,75 @@ void UpdateTutorial(void)
 
 	if (fade == FADE_NONE) //フェードしていない場合
 	{
+		if (g_TutorialInputCounter <= 0)
+		{
+			D3DXVECTOR3 stick = GetLeftStick();
 
-		if (GetKeyboardTrigger(DIK_RETURN) == true || GetJoypadTrigger(JOYKEY_A))
-		{ //決定キーが押された
 
-			//サウンド
+			if (GetKeyboardPress(DIK_RETURN) == true || GetKeyboardPress(DIK_D) == true || GetKeyboardPress(DIK_RIGHT) == true
+				|| GetJoypadPress(JOYKEY_RIGHT) || GetJoypadPress(JOYKEY_A) || 0 < stick.x )
+			{ //進む場合
 
-			PlaySound(SOUND_LABEL_SE_ENTER);
+				//サウンド
 
-			//テクスチャの切り替え
+				PlaySound(SOUND_LABEL_SE_ENTER);
 
-			if (g_Tex == TUTORIAL_MAX - 1)
-			{ //最後のテクスチャの場合
+				//テクスチャの切り替え
 
-				//モードの設定
+				if (g_Tex == TUTORIAL_MAX - 1)
+				{ //最後のテクスチャの場合
 
-				SetFade(MODE_GAME);
+					//モードの設定
+
+					SetFade(MODE_GAME);
+				}
+				else
+				{ //最後じゃない場合
+
+					//矢印の状態設定
+
+					SetStateTutorialArrow(1);
+
+					//テクスチャを次のものにする
+
+					g_Tex++;
+				}
+
+				g_TutorialInputCounter = TUTORIALINPUT_TIME_INTERVAL;
 			}
-			else
-			{ //最後じゃない場合
-				g_Tex++;
+			else if (GetKeyboardPress(DIK_A) == true || GetKeyboardPress(DIK_LEFT) == true
+				|| GetJoypadPress(JOYKEY_LEFT) || GetJoypadPress(JOYKEY_B) || stick.x < 0)
+			{ //戻る場合
+
+				//矢印の状態設定
+
+				SetStateTutorialArrow(0);
+
+				//サウンド
+
+				PlaySound(SOUND_LABEL_SE_ENTER);
+
+				//テクスチャの切り替え
+
+				if (g_Tex != 0)
+				{ //最初のテクスチャじゃない場合
+
+					//テクスチャを前のものにする
+					g_Tex--;
+				}
+
+				g_TutorialInputCounter = TUTORIALINPUT_TIME_INTERVAL;
 			}
 		}
-		else if (GetKeyboardTrigger(DIK_A) == true || GetJoypadTrigger(JOYKEY_B))
-		{ //決定キーが押された
-
-			//サウンド
-
-			PlaySound(SOUND_LABEL_SE_ENTER);
-
-			//テクスチャの切り替え
-
-			if (g_Tex != 0)
-			{
-				g_Tex--;
-			}
+		else
+		{
+			g_TutorialInputCounter--;
 		}
 	}
+
+	//各オブジェクトの更新処理
+
+	UpdateTutorialArrow(); //矢印
 }
 
 //==================================
@@ -257,5 +304,9 @@ void DrawTutorial(void)
 	//ポリゴンの描画
 												  //描画する最初の頂点インデックス
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
-	
+
+	//各オブジェクトの描画処理
+
+	DrawTutorialArrow(); //矢印
+
 }

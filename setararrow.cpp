@@ -12,12 +12,12 @@
 
 typedef enum
 {
-	SetArrowSTATE_NORMAL = 0, //通常状態
+	TUTORIALARROWSTATE_NORMAL = 0, //通常状態
 
-	SetArrowSTATE_TRIGGER, //押された状態
+	TUTORIALARROWSTATE_TRIGGER, //押された状態
 
-	SetArrowSTATE_MAX
-}SetArrowSTATE;
+	TUTORIALARROWSTATE_MAX
+}TUTORIALARROWSTATE;
 
 //矢印の情報構造体
 
@@ -27,7 +27,7 @@ typedef struct
 
 	D3DXVECTOR3 move; //移動量
 
-	SetArrowSTATE State; //状態
+	TUTORIALARROWSTATE State; //状態
 
 	int nStateCounter; //状態カウンター
 
@@ -42,7 +42,7 @@ LPDIRECT3DTEXTURE9 g_pTextureSetArrow[NUM_SETARROW] = {}; //テクスチャへのポイン
 
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffSetArrow = NULL; //頂点バッファへのポインタ
 
-const char* g_aSetArrowTexture_Path[SetArrowSTATE_MAX] =
+const char* g_aSetArrowTexture_Path[TUTORIALARROWSTATE_MAX] =
 {
 	"Data/TEXTURE/SET/yajirushi001.png",
 
@@ -66,7 +66,7 @@ void InitSetArrow(void)
 	{
 		g_SetArrow[nCount].move = D3DXVECTOR3(0.0f, 5.0f, 0.0f); //移動量
 
-		g_SetArrow[nCount].State = SetArrowSTATE_NORMAL; //状態
+		g_SetArrow[nCount].State = TUTORIALARROWSTATE_NORMAL; //状態
 
 		g_SetArrow[nCount].nStateCounter = 0; //状態カウント
 
@@ -195,7 +195,7 @@ void InitSetArrow(void)
 void UninitSetArrow(void)
 {
 	//テクスチャの破棄
-	for (int nCnt = 0; nCnt < SetArrowSTATE_MAX; nCnt++)
+	for (int nCnt = 0; nCnt < TUTORIALARROWSTATE_MAX; nCnt++)
 	{
 		if (g_pTextureSetArrow[nCnt] != NULL)
 		{
@@ -226,7 +226,7 @@ void UpdateSetArrow(void)
 
 		if (g_SetArrow[nCnt].nStateCounter <= 0)
 		{
-			g_SetArrow[nCnt].State = SetArrowSTATE_NORMAL;
+			g_SetArrow[nCnt].State = TUTORIALARROWSTATE_NORMAL;
 		}
 	}
 }
@@ -262,7 +262,7 @@ void DrawSetArrow(void)
 //=========================
 void SetStateSetArrow(int nSelect)
 {
-	g_SetArrow[nSelect].State = SetArrowSTATE_TRIGGER;
+	g_SetArrow[nSelect].State = TUTORIALARROWSTATE_TRIGGER;
 
 	g_SetArrow[nSelect].nStateCounter = 10; //１秒間
 }
