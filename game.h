@@ -33,6 +33,6 @@ bool FlagEnemy(D3DXVECTOR3 posenemy);
 
 //ƒ|[ƒY‚ÌØ‚è‘Ö‚¦ˆ—
 
-void SetPose(void);
+void SetPause(void);
 
 #endif 

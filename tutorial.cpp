@@ -19,11 +19,15 @@
 
 typedef enum
 {
-	TUTORIAL_0 = 0, //操作方法
+	TUTORIAL_0 = 0, //基本ルール
 
 	TUTORIAL_1, //レベルアップ
 
-	TUTORIAL_2, //ボス
+	TUTORIAL_2, //ボス１
+
+	TUTORIAL_3, //ボス２
+
+	TUTORIAL_4, //操作方法
 
 	TUTORIAL_MAX //テクスチャの最大数
 
@@ -35,17 +39,21 @@ LPDIRECT3DTEXTURE9 g_apTextureTutorial[TUTORIAL_MAX]; //テクスチャへのポインタ
 
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffTutorial = NULL; //頂点バッファへのポインタ
 
-TUTORIALNAME g_Tex; //現在のテクスチャを代入する
+int g_Tex; //現在のテクスチャを代入する
 
 //ファイル名
 
 const char* g_aTutorialTexture_Path[TUTORIAL_MAX] =
 {
-	"Data/TEXTURE/TUTORIAL/tutorial000.png", //操作方法
+	"Data/TEXTURE/TUTORIAL/tutorial000.png", //基本ルール
 
 	"Data/TEXTURE/TUTORIAL/tutorial001.png", //レベルアップ
 
-	"Data/TEXTURE/TUTORIAL/tutorial002.png", //ボス
+	"Data/TEXTURE/TUTORIAL/tutorial002.png", //ボス１
+
+	"Data/TEXTURE/TUTORIAL/tutorial003.png", //ボス２
+
+	"Data/TEXTURE/TUTORIAL/tutorial004.png", //操作方法
 };
 //==================================
 // チュートリアルの初期化処理
@@ -192,27 +200,30 @@ void UpdateTutorial(void)
 
 			//テクスチャの切り替え
 
-			switch (g_Tex) //テクスチャの値を比較
-			{
-			case TUTORIAL_0: //操作方法の場合
-
-				g_Tex = TUTORIAL_1; //レベルアップのテクスチャに
-
-				break;
-
-			case TUTORIAL_1: //レベルアップの場合
-
-				g_Tex = TUTORIAL_2; //ボスのテクスチャに
-
-				break;
-
-			case TUTORIAL_2: //ボスの場合
+			if (g_Tex == TUTORIAL_MAX - 1)
+			{ //最後のテクスチャの場合
 
 				//モードの設定
 
 				SetFade(MODE_GAME);
+			}
+			else
+			{ //最後じゃない場合
+				g_Tex++;
+			}
+		}
+		else if (GetKeyboardTrigger(DIK_A) == true || GetJoypadTrigger(JOYKEY_B))
+		{ //決定キーが押された
 
-				break;
+			//サウンド
+
+			PlaySound(SOUND_LABEL_SE_ENTER);
+
+			//テクスチャの切り替え
+
+			if (g_Tex != 0)
+			{
+				g_Tex--;
 			}
 		}
 	}

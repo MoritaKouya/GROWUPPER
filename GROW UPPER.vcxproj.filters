@@ -129,7 +129,7 @@
     <ClCompile Include="settext.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="pose.cpp">
+    <ClCompile Include="pause.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="posetext.cpp">
@@ -260,13 +260,13 @@
     <ClInclude Include="settext.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="pose.h">
+    <ClInclude Include="pause.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="posetext.h">
+    <ClInclude Include="pausetext.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="posemenu.h">
+    <ClInclude Include="pausemenu.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="scoretxt.h">

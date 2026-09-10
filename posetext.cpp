@@ -4,24 +4,24 @@
 // Author森田煌也
 // 
 //=============================
-#include "posetext.h"
+#include "pausetext.h"
 
 //マクロ定義
 
-#define POSETEXT_SIZE_X (400)
+#define PAUSETEXT_SIZE_X (400)
 
-#define POSETEXT_SIZE_Y (100)
+#define PAUSETEXT_SIZE_Y (100)
 
 //グローバル変数
 
-LPDIRECT3DTEXTURE9 g_pTexturePoseText = NULL; //テクスチャへのポインタ
+LPDIRECT3DTEXTURE9 g_pTexturePauseText = NULL; //テクスチャへのポインタ
 
-LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffPoseText = NULL; //頂点バッファのポインタ
+LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffPauseText = NULL; //頂点バッファのポインタ
 
 //=========================
 //ポーズ画面の初期化処理
 //=========================
-void InitPoseText(void)
+void InitPauseText(void)
 {
 	D3DXVECTOR3 pos = D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 5, 0.0f);
 
@@ -31,9 +31,9 @@ void InitPoseText(void)
 
 	D3DXCreateTextureFromFile(pDevice,
 
-		"Data/TEXTURE/POSE/posetext.png", //テクスチャのファイル名
+		"Data/TEXTURE/PAUSE/pausetext.png", //テクスチャのファイル名
 
-		&g_pTexturePoseText);
+		&g_pTexturePauseText);
 
 	//頂点バッファの生成
 
@@ -45,7 +45,7 @@ void InitPoseText(void)
 
 		D3DPOOL_MANAGED,
 
-		&g_pVtxBuffPoseText,
+		&g_pVtxBuffPauseText,
 
 		NULL);
 
@@ -55,31 +55,31 @@ void InitPoseText(void)
 
 	//頂点バッファをロックし、頂点データへのポインタを取得
 
-	g_pVtxBuffPoseText->Lock(0, 0, (void**)&pVtx, 0);
+	g_pVtxBuffPauseText->Lock(0, 0, (void**)&pVtx, 0);
 
 	//頂点座標の設定
 
-	pVtx[0].pos.x = pos.x + sinf(-D3DX_PI * 0.75f) * POSETEXT_SIZE_X;
+	pVtx[0].pos.x = pos.x + sinf(-D3DX_PI * 0.75f) * PAUSETEXT_SIZE_X;
 
-	pVtx[0].pos.y = pos.y + cosf(-D3DX_PI * 0.75f) * POSETEXT_SIZE_Y;
+	pVtx[0].pos.y = pos.y + cosf(-D3DX_PI * 0.75f) * PAUSETEXT_SIZE_Y;
 
 	pVtx[0].pos.z = 0.0f;
 
-	pVtx[1].pos.x = pos.x + sinf(D3DX_PI * 0.75f) * POSETEXT_SIZE_X;
+	pVtx[1].pos.x = pos.x + sinf(D3DX_PI * 0.75f) * PAUSETEXT_SIZE_X;
 
-	pVtx[1].pos.y = pos.y + cosf(D3DX_PI * 0.75f) * POSETEXT_SIZE_Y;
+	pVtx[1].pos.y = pos.y + cosf(D3DX_PI * 0.75f) * PAUSETEXT_SIZE_Y;
 
 	pVtx[1].pos.z = 0.0f;
 
-	pVtx[2].pos.x = pos.x + sinf(-D3DX_PI * 0.25) * POSETEXT_SIZE_X;
+	pVtx[2].pos.x = pos.x + sinf(-D3DX_PI * 0.25) * PAUSETEXT_SIZE_X;
 
-	pVtx[2].pos.y = pos.y + cosf(-D3DX_PI * 0.25) * POSETEXT_SIZE_Y;
+	pVtx[2].pos.y = pos.y + cosf(-D3DX_PI * 0.25) * PAUSETEXT_SIZE_Y;
 
 	pVtx[2].pos.z = 0.0f;
 
-	pVtx[3].pos.x = pos.x + sinf(D3DX_PI * 0.25) * POSETEXT_SIZE_X;
+	pVtx[3].pos.x = pos.x + sinf(D3DX_PI * 0.25) * PAUSETEXT_SIZE_X;
 
-	pVtx[3].pos.y = pos.y + cosf(D3DX_PI * 0.25) * POSETEXT_SIZE_Y;
+	pVtx[3].pos.y = pos.y + cosf(D3DX_PI * 0.25) * PAUSETEXT_SIZE_Y;
 
 	pVtx[3].pos.z = 0.0f;
 
@@ -113,35 +113,35 @@ void InitPoseText(void)
 
 	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
 
-	g_pVtxBuffPoseText->Unlock();
+	g_pVtxBuffPauseText->Unlock();
 }
 
 //=========================
 //ポーズ画面の終了処理
 //=========================
-void UninitPoseText(void)
+void UninitPauseText(void)
 {
-	if (g_pTexturePoseText != NULL)
+	if (g_pTexturePauseText != NULL)
 	{
-		g_pTexturePoseText->Release();
+		g_pTexturePauseText->Release();
 
-		g_pTexturePoseText = NULL;
+		g_pTexturePauseText = NULL;
 	}
 
 	//頂点バッファの破棄
 
-	if (g_pVtxBuffPoseText != NULL)
+	if (g_pVtxBuffPauseText != NULL)
 	{
-		g_pVtxBuffPoseText->Release();
+		g_pVtxBuffPauseText->Release();
 
-		g_pVtxBuffPoseText = NULL;
+		g_pVtxBuffPauseText = NULL;
 	}
 }
 
 //=========================
 //ポーズ画面の更新処理
 //=========================
-void UpdatePoseText(void)
+void UpdatePauseText(void)
 {
 
 }
@@ -149,7 +149,7 @@ void UpdatePoseText(void)
 //=========================
 //ポーズ画面の描画処理
 //=========================
-void DrawPoseText(void)
+void DrawPauseText(void)
 {
 	LPDIRECT3DDEVICE9 pDevice; //デバイスへのポインタ
 
@@ -157,7 +157,7 @@ void DrawPoseText(void)
 
 	//頂点バッファをデータストリームに設定
 
-	pDevice->SetStreamSource(0, g_pVtxBuffPoseText, 0, sizeof(VERTEX_2D));
+	pDevice->SetStreamSource(0, g_pVtxBuffPauseText, 0, sizeof(VERTEX_2D));
 
 	//頂点フォーマットの設定
 
@@ -165,7 +165,7 @@ void DrawPoseText(void)
 
 	//テクスチャの設定
 
-	pDevice->SetTexture(0, g_pTexturePoseText); //テクスチャを使用しないときはNULLを指定する
+	pDevice->SetTexture(0, g_pTexturePauseText); //テクスチャを使用しないときはNULLを指定する
 
 	//ポリゴンの描画
 

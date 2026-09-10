@@ -597,6 +597,35 @@ void UpdateInputCursor(void)
 		}
 
 	}
+
+	if (GetJoypadTrigger(JOYKEY_START) == true)
+	{
+		for (nCount = 0; nCount < MAX_NAME; nCount++)
+		{ //名前があると判定するまで繰り返す処理
+			if (g_Name[nCount].nName != NAME_SPACE && g_Name[nCount].nName != NAME_NULL)
+			{ //名前がある場合
+
+
+				g_bNoName = false;
+
+				break;
+			}
+		}
+
+		if (g_bNoName == true) //名前がない場合
+		{
+			for (nCount = 0; nCount < MAX_NONAME; nCount++)
+			{ //名前をNONAMEにする
+				g_Name[nCount].nName = g_NoName[nCount];
+
+				g_Name[nCount].ntype = ALPHABETCHART_0; //大文字にする
+			}
+		}
+
+		//モード切替（チュートリアル）
+
+		SetFade(MODE_TUTORIAL);
+	}
 }
 
 //==================================

@@ -26,7 +26,7 @@
 #include <time.h>
 #include "inputname.h"
 #include "outputname.h"
-#include "pose.h"
+#include "pause.h"
 #include "hptext.h" 
 
 //マクロ定義
@@ -110,7 +110,7 @@ void InitGame(void)
 
 	g_bPause = false; //ポーズの状態を初期化
 
-	InitPose();
+	InitPause();
 
 	srand((unsigned int)time(NULL));
 	
@@ -182,7 +182,7 @@ void UninitGame(void)
 
 	//ポーズの終了処理
 
-	UninitPose();
+	UninitPause();
 }
 
 //=========================
@@ -206,7 +206,7 @@ void UpdateGame(void)
 		{
 			//ポーズの切り替え
 
-			SetPose();
+			SetPause();
 		}
 
 		if (g_bPause == false)
@@ -298,7 +298,7 @@ void UpdateGame(void)
 		{
 			//ポーズ画面の更新処理
 
-			UpdatePose();
+			UpdatePause();
 
 		}
 	}
@@ -372,7 +372,7 @@ void DrawGame(void)
 	{
 		//ポーズ画面
 
-		DrawPose();
+		DrawPause();
 	}
 }
 
@@ -413,7 +413,7 @@ bool FlagEnemy(D3DXVECTOR3 posenemy)
 //=========================
 //ポーズの切り替え処理
 //=========================
-void SetPose(void)
+void SetPause(void)
 {
 	g_bPause = g_bPause ^ 1;
 }
