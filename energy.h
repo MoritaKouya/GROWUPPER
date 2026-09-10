@@ -36,7 +36,12 @@ typedef struct
 
 	int nEnergy; //エネルギーの量
 
+	float nAnglePlayer; //プレイヤーとの角度
+
+	float fSpeed; //移動速度
+
 	bool bUse; //使用しているかどうか
+
 }Energy;
 
 //プロトタイプ宣言
@@ -46,6 +51,10 @@ void InitEnergy(void); //初期化
 void UninitEnergy(void); //終了
 
 void UpdateEnergy(void); //更新
+
+float CalcAngleEnergy(D3DXVECTOR3 ppos); //プレイヤーとの角度計算
+
+void MoveEnergy(int nCnt); //移動
 
 void DrawEnergy(void); //描画
 

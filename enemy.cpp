@@ -538,22 +538,22 @@ void MoveEnemy(int nCnt)
 
 	//壁に当たった時
 
-	if (g_aEnemy[nCnt].pos.x - PLAYER_DIAGONAL < 0) //一番左に当たった場合
+	if (g_aEnemy[nCnt].pos.x - ENEMY_DIAGONAL < 0) //一番左に当たった場合
 	{
-		g_aEnemy[nCnt].pos.x = PLAYER_DIAGONAL; //g_player.posを一番左にする
+		g_aEnemy[nCnt].pos.x = ENEMY_DIAGONAL; //g_player.posを一番左にする
 	}
-	else if (SCREEN_WIDTH < g_aEnemy[nCnt].pos.x + PLAYER_DIAGONAL) //一番右に当たった場合
+	else if (SCREEN_WIDTH < g_aEnemy[nCnt].pos.x + ENEMY_DIAGONAL) //一番右に当たった場合
 	{
-		g_aEnemy[nCnt].pos.x = SCREEN_WIDTH - PLAYER_DIAGONAL; //g_player.posを一番右にする
+		g_aEnemy[nCnt].pos.x = SCREEN_WIDTH - ENEMY_DIAGONAL; //g_player.posを一番右にする
 	}
 
-	if (g_aEnemy[nCnt].pos.y - PLAYER_DIAGONAL < 0) //一番上にあたった場合
+	if (g_aEnemy[nCnt].pos.y - ENEMY_DIAGONAL < 0) //一番上にあたった場合
 	{
-		g_aEnemy[nCnt].pos.y = PLAYER_DIAGONAL; //g_player.posを一番上にする
+		g_aEnemy[nCnt].pos.y = ENEMY_DIAGONAL; //g_player.posを一番上にする
 	}
-	else if (SCREEN_HEIGHT < g_aEnemy[nCnt].pos.y + PLAYER_DIAGONAL) //一番下にあたった場合
+	else if (SCREEN_HEIGHT < g_aEnemy[nCnt].pos.y + ENEMY_DIAGONAL) //一番下にあたった場合
 	{
-		g_aEnemy[nCnt].pos.y = SCREEN_HEIGHT - PLAYER_DIAGONAL; //g_player.posを一番下にする
+		g_aEnemy[nCnt].pos.y = SCREEN_HEIGHT - ENEMY_DIAGONAL; //g_player.posを一番下にする
 	}
 
 	//頂点情報の設定
@@ -589,6 +589,8 @@ void MoveEnemy(int nCnt)
 	pVtx[3].pos.y = g_aEnemy[nCnt].pos.y + cosf(D3DX_PI * 0.25) * ENEMY_DIAGONAL;
 
 	pVtx[3].pos.z = 0.0f;
+
+	g_pVtxBuffEnemy->Unlock();
 }
 //===================
 // 敵の描画処理

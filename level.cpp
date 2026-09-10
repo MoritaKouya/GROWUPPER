@@ -260,7 +260,12 @@ void LevelUpp(int* nLevel)
 
 	//レベルアップ
 
-	*nLevel += 1;	
+	*nLevel += 1;
+
+	if (100 <= *nLevel)
+	{
+		*nLevel = 99;
+	}
 
 	//レベルをグローバル変数に代入
 

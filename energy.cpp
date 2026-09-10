@@ -52,6 +52,10 @@ void InitEnergy(void)
 
 		g_aEnergy[nCntEnergy].nEnergy = 1; //エネルギー量
 
+		g_aEnergy[nCntEnergy].nAnglePlayer = 0.0f;
+
+		g_aEnergy[nCntEnergy].fSpeed = 10;
+
 		g_aEnergy[nCntEnergy].bUse = false; //使用していない状態にする
 	}
 
@@ -176,10 +180,94 @@ void UpdateEnergy(void)
 	{
 		if (g_aEnergy[nCntEnergy].bUse == true)
 		{//球が使用されている場合
-			
+
 			CollisionPlayer(&g_aEnergy[nCntEnergy]); //プレイヤーとの当たり判定
+
+			//プレイヤーとの向き
+
+			g_aEnergy[nCntEnergy].nAnglePlayer = CalcAngleEnergy(g_aEnergy[nCntEnergy].pos);
+
+			//移動量の設定
+
+			g_aEnergy[nCntEnergy].move = D3DXVECTOR3(
+
+				cosf(g_aEnergy[nCntEnergy].nAnglePlayer) * g_aEnergy[nCntEnergy].fSpeed,
+
+				sinf(g_aEnergy[nCntEnergy].nAnglePlayer) * g_aEnergy[nCntEnergy].fSpeed,
+
+				0.0f);
+
+			//エネルギーの移動
+
+			MoveEnergy(nCntEnergy);
 		}
 	}
+}
+
+
+//===============================
+// エネルギーとプレイヤーの角度計算
+//===============================
+float CalcAngleEnergy(D3DXVECTOR3 ppos)
+{
+	Player* pPlayer = GetPlayer(); //プレイヤーの情報
+
+	float dx = pPlayer->pos.x - ppos.x; //x座標の差
+
+	float dy = pPlayer->pos.y - ppos.y; //y座標の差
+
+	float angle = (float)atan2(dy, dx); //角度
+
+	return angle; //角度を返す
+}
+
+
+//===============================
+// エネルギーの移動処理
+//===============================
+void MoveEnergy(int nCnt)
+{
+	//位置を更新
+
+	g_aEnergy[nCnt].pos.x += g_aEnergy[nCnt].move.x;
+
+	g_aEnergy[nCnt].pos.y += g_aEnergy[nCnt].move.y;
+
+	//頂点情報の設定
+
+	VERTEX_2D* pVtx;
+
+	//頂点バッファをロックし、頂点データへのポインタを取得
+
+	g_pVtxBuffEnergy->Lock(0, 0, (void**)&pVtx, 0);
+
+	pVtx += nCnt * 4;
+
+	pVtx[0].pos.x = g_aEnergy[nCnt].pos.x + sinf(-D3DX_PI * 0.75f) * ENERGY_SIZE;
+
+	pVtx[0].pos.y = g_aEnergy[nCnt].pos.y + cosf(-D3DX_PI * 0.75f) * ENERGY_SIZE;
+
+	pVtx[0].pos.z = 0.0f;
+
+	pVtx[1].pos.x = g_aEnergy[nCnt].pos.x + sinf(D3DX_PI * 0.75f) * ENERGY_SIZE;
+
+	pVtx[1].pos.y = g_aEnergy[nCnt].pos.y + cosf(D3DX_PI * 0.75f) * ENERGY_SIZE;
+
+	pVtx[1].pos.z = 0.0f;
+
+	pVtx[2].pos.x = g_aEnergy[nCnt].pos.x + sinf(-D3DX_PI * 0.25) * ENERGY_SIZE;
+
+	pVtx[2].pos.y = g_aEnergy[nCnt].pos.y + cosf(-D3DX_PI * 0.25) * ENERGY_SIZE;
+
+	pVtx[2].pos.z = 0.0f;
+
+	pVtx[3].pos.x = g_aEnergy[nCnt].pos.x + sinf(D3DX_PI * 0.25) * ENERGY_SIZE;
+
+	pVtx[3].pos.y = g_aEnergy[nCnt].pos.y + cosf(D3DX_PI * 0.25) * ENERGY_SIZE;
+
+	pVtx[3].pos.z = 0.0f;
+
+	g_pVtxBuffEnergy->Unlock();
 }
 
 //===============================
@@ -279,6 +367,7 @@ void SetEnergy(D3DXVECTOR3 pos, int nEnergy)
 	}
 	g_pVtxBuffEnergy->Unlock();
 }
+
 
 //==================
 // プレイヤーとの当たり判定

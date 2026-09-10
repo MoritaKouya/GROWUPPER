@@ -104,7 +104,7 @@ void ActionType3(int nCnt); //行動パターン３
 
 void ActionType4(int nCnt); //行動パターン４
 
-void MoveEnemy(int nCnt);
+void MoveEnemy(int nCnt); //敵の移動
 
 //描画
 
