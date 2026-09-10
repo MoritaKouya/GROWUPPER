@@ -29,6 +29,7 @@
 #include "pause.h"
 #include "hptext.h"
 #include "damagescreen.h"
+#include "startcountdown.h"
 
 //マクロ定義
 
@@ -38,14 +39,14 @@
 
 bool g_bPause; //ポーズ状態のON/OFF
 
+bool g_bBgm; //bgmを流し始めるかどうか（１回だけ流すため）
+
 //=========================
 //ゲーム画面の初期化処理
 //=========================
 void InitGame(void)
 {
-	//サウンドの再生
-
-	PlaySound(SOUND_LABEL_BGM001); //再生したいサウンドを指定
+	g_bBgm = true;
 
 	//+--------------------------------+
 	//|  各種オブジェクトの初期化処理  |
@@ -107,19 +108,44 @@ void InitGame(void)
 
 	InitOutputName();
 
-	//ポーズの初期化
-
-	g_bPause = false; //ポーズの状態を初期化
-
 	//ダメージスクリーン
 
 	InitDamageScreen();
 
+	//スタートカウントダウン
+
+	InitStartCountDown();
+
+	//ポーズの初期化
+
+	g_bPause = false; //ポーズの状態を初期化
+
 	InitPause();
+
+	//敵の呼び出し
 
 	srand((unsigned int)time(NULL));
 	
 	SetEnemy(D3DXVECTOR3(1000.0f,500.0f , 0.0f), ENEMYTYPE_1); //金UFOを確定で呼び出す
+
+	while(GetNumEnemy() < 5)
+	{
+		int nType = rand() % ENEMYTYPE_MAX; //ランダムで敵のタイプを決める
+
+		ENEMYTYPE type = (ENEMYTYPE)nType; //タイプを代入する
+
+		float fX = (float)(rand() % 980 + 150 + 1); //縦
+
+		float fY = (float)(rand() % 420 + 150 + 1); //横
+
+		bool bFlagEnemy = FlagEnemy(D3DXVECTOR3(fX, fY, 0.0f));
+
+		if (bFlagEnemy == true)
+		{ //敵が出て来ていい場合
+
+			SetEnemy(D3DXVECTOR3(fX, fY, 0.0f), type);
+		}
+	}
 
 }
 
@@ -189,6 +215,10 @@ void UninitGame(void)
 
 	UninitDamageScreen();
 
+	//スタートカウントダウン
+	
+	UninitStartCountDown();
+
 	//ポーズの終了処理
 
 	UninitPause();
@@ -209,111 +239,137 @@ void UpdateGame(void)
 
 	if (fade == FADE_NONE) //フェードしていない場合
 	{
+		//スタートカウンターの獲得処理
+
+		int nCountDown = GetStartCounter();
+
+		if (nCountDown <= 0)
+		{ //スタートカウンターが０以下の場合
+
+			if (g_bBgm == true)
+			{
+				//サウンドの再生
+
+				PlaySound(SOUND_LABEL_BGM001); //再生したいサウンドを指定
+
+				g_bBgm = false; //bgmが２重にならないようにする
+			}
+
 		//ポーズ
 
-		if (GetKeyboardTrigger(DIK_P) || GetJoypadTrigger(JOYKEY_START) == true)
-		{
-			//ポーズの切り替え
-
-			SetPause();
-		}
-
-		if (g_bPause == false)
-		{
-			//背景の更新処理
-
-			UpdateBg();
-
-			//プレイヤーの更新処理
-
-			UpdatePlayer();
-
-			UpdatePlayerEffect(); //プレイヤーエフェクトの更新処理
-
-			UpdateHpText(); //HPの文字
-
-			UpdateHpBer(); //hpバーの更新処理
-
-			//レベルの更新
-
-			UpdateLevel();
-
-			//敵の更新処理
-
-			UpdateBoss(); //ボス
-
-			UpdateBomb(); //ボム
-
-			UpdateEnemy(); //敵
-
-			//球の更新処理
-
-			UpdateBullet();
-
-			//エフェクトの更新処理
-
-			UpdateEffect();
-
-			//爆発の更新処理
-
-			UpdateExplosion();
-
-			//スコアの更新処理
-
-			UpdateScore();
-
-			//タイマーの更新処理
-
-			UpdateTimer();
-
-			//エネルギーの更新処理
-
-			UpdateEnergy();
-
-			UpdateEnergyBer(); //エネルギーバー
-
-			//ダメージスクリーン
-
-			UpdateDamageScreen();
-
-			//敵を増やす
-
-			if (GetNumEnemy() < 5)
+			if (GetKeyboardTrigger(DIK_P) || GetJoypadTrigger(JOYKEY_START) == true)
 			{
-				int nType = rand() % ENEMYTYPE_MAX; //ランダムで敵のタイプを決める
+				//ポーズの切り替え
 
-				ENEMYTYPE type = (ENEMYTYPE)nType; //タイプを代入する
+				SetPause();
+			}
 
-				float fX = (float)(rand() % 980 + 150 + 1); //縦
+			if (g_bPause == false)
+			{
+				//背景の更新処理
 
-				float fY = (float)(rand() % 420 + 150 + 1); //横
+				UpdateBg();
 
-				bool bFlagEnemy = FlagEnemy(D3DXVECTOR3(fX, fY, 0.0f));
+				//プレイヤーの更新処理
 
-				if (bFlagEnemy == true)
-				{ //敵が出て来ていい場合
+				UpdatePlayer();
 
-					SetEnemy(D3DXVECTOR3(fX, fY, 0.0f), type);
+				UpdatePlayerEffect(); //プレイヤーエフェクトの更新処理
+
+				UpdateHpText(); //HPの文字
+
+				UpdateHpBer(); //hpバーの更新処理
+
+				//レベルの更新
+
+				UpdateLevel();
+
+				//敵の更新処理
+
+				UpdateBoss(); //ボス
+
+				UpdateBomb(); //ボム
+
+				UpdateEnemy(); //敵
+
+				//球の更新処理
+
+				UpdateBullet();
+
+				//エフェクトの更新処理
+
+				UpdateEffect();
+
+				//爆発の更新処理
+
+				UpdateExplosion();
+
+				//スコアの更新処理
+
+				UpdateScore();
+
+				//タイマーの更新処理
+
+				UpdateTimer();
+
+				//エネルギーの更新処理
+
+				UpdateEnergy();
+
+				UpdateEnergyBer(); //エネルギーバー
+
+				//ダメージスクリーン
+
+				UpdateDamageScreen();
+
+				//敵を増やす
+
+				if (GetNumEnemy() < 5)
+				{
+					int nType = rand() % ENEMYTYPE_MAX; //ランダムで敵のタイプを決める
+
+					ENEMYTYPE type = (ENEMYTYPE)nType; //タイプを代入する
+
+					float fX = (float)(rand() % 980 + 150 + 1); //縦
+
+					float fY = (float)(rand() % 420 + 150 + 1); //横
+
+					bool bFlagEnemy = FlagEnemy(D3DXVECTOR3(fX, fY, 0.0f));
+
+					if (bFlagEnemy == true)
+					{ //敵が出て来ていい場合
+
+						SetEnemy(D3DXVECTOR3(fX, fY, 0.0f), type);
+					}
+				}
+
+				if (GetTimer() == 0)//ゲーム終了処理
+				{ //ゲーム終了条件
+
+					//モード設定
+
+					SetFade(MODE_RESULT);
+
 				}
 			}
+			else if (g_bPause == true) //ポーズ画面の場合
+			{
+				//ポーズ画面の更新処理
 
-			if (GetTimer() == 0)//ゲーム終了処理
-			{ //ゲーム終了条件
-
-				//モード設定
-
-				SetFade(MODE_RESULT);
+				UpdatePause();
 
 			}
 
 		}
-		else if (g_bPause == true) //ポーズ画面の場合
-		{
-			//ポーズ画面の更新処理
+		else
+		{//スタートカウンターが０より大きい場合
 
-			UpdatePause();
+		 //スタートカウントダウン
+
+			UpdateStartCountDown();
 
 		}
+
 	}
 }
 
@@ -390,6 +446,17 @@ void DrawGame(void)
 		//ポーズ画面
 
 		DrawPause();
+	}
+
+	int nCountDown = GetStartCounter();
+
+	if (0 < nCountDown)
+	{ //スタートカウンターが０より大きい場合
+
+		 //スタートカウントダウン
+
+		DrawStartCountDown();
+	
 	}
 }
 

@@ -224,7 +224,7 @@ void InitAlphabetChart(void)
 	//頂点バッファの生成
 
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4, //確保するバッファのサイズ
-											   //sizeof(VERTEX_2D)*必要な超点数
+											   //sizeof(VERTEX_2D)*必要な頂点数
 		D3DUSAGE_WRITEONLY,
 
 		FVF_VERTEX_2D, //頂点フォーマット
@@ -399,7 +399,7 @@ void InitInputCursor(void)
 	//頂点バッファの生成
 
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4, //確保するバッファのサイズ
-											   //sizeof(VERTEX_2D)*必要な超点数
+											   //sizeof(VERTEX_2D)*必要な頂点数
 		D3DUSAGE_WRITEONLY,
 
 		FVF_VERTEX_2D, //頂点フォーマット
@@ -919,7 +919,7 @@ void InitName(void)
 	//頂点バッファの生成
 
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * MAX_NAME, //確保するバッファのサイズ
-											   //sizeof(VERTEX_2D)*必要な超点数
+											   //sizeof(VERTEX_2D)*必要な頂点数
 		D3DUSAGE_WRITEONLY,
 
 		FVF_VERTEX_2D, //頂点フォーマット
@@ -1108,7 +1108,7 @@ void InitTextCursor(void)
 	//頂点バッファの生成
 
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4, //確保するバッファのサイズ
-											   //sizeof(VERTEX_2D)*必要な超点数
+											   //sizeof(VERTEX_2D)*必要な頂点数
 		D3DUSAGE_WRITEONLY,
 
 		FVF_VERTEX_2D, //頂点フォーマット

@@ -63,7 +63,7 @@ void InitHpBer(void)
 	//頂点バッファの生成
 
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * NUM_HP_BER, //確保するバッファのサイズ
-													   //sizeof(VERTEX_2D)*必要な超点数
+													   //sizeof(VERTEX_2D)*必要な頂点数
 
 		D3DUSAGE_WRITEONLY,
 
