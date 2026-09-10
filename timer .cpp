@@ -16,7 +16,7 @@
 
 #define MAX_LINES (1) //行数
 
-#define REMAINING_TIME (60 * 3) //タイムリミット
+#define REMAINING_TIME (60 * 180) //タイムリミット
 
 //グローバル変数
 
@@ -63,7 +63,6 @@ void InitTimer(void)
 
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * NUM_PLACE, //確保するバッファのサイズ
 													   //sizeof(VERTEX_2D)*必要な超点数
-
 		D3DUSAGE_WRITEONLY,
 
 		FVF_VERTEX_2D, //頂点フォーマット

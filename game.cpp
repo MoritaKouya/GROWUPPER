@@ -27,7 +27,8 @@
 #include "inputname.h"
 #include "outputname.h"
 #include "pause.h"
-#include "hptext.h" 
+#include "hptext.h"
+#include "damagescreen.h"
 
 //マクロ定義
 
@@ -110,6 +111,10 @@ void InitGame(void)
 
 	g_bPause = false; //ポーズの状態を初期化
 
+	//ダメージスクリーン
+
+	InitDamageScreen();
+
 	InitPause();
 
 	srand((unsigned int)time(NULL));
@@ -179,6 +184,10 @@ void UninitGame(void)
 	//名前の表示の終了処理
 
 	InitOutputName();
+
+	//ダメージスクリーン
+
+	UninitDamageScreen();
 
 	//ポーズの終了処理
 
@@ -262,6 +271,10 @@ void UpdateGame(void)
 			UpdateEnergy();
 
 			UpdateEnergyBer(); //エネルギーバー
+
+			//ダメージスクリーン
+
+			UpdateDamageScreen();
 
 			//敵を増やす
 
@@ -367,6 +380,10 @@ void DrawGame(void)
 	//名前の表示の描画処理
 
 	DrawOutputName();
+
+	//ダメージスクリーン
+
+	DrawDamageScreen();
 
 	if (g_bPause == true)
 	{

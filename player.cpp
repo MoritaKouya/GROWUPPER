@@ -24,6 +24,8 @@
 
 #include "sound.h"
 
+#include "damagescreen.h"
+
 //マクロ定義
 
 #define MAX_ANIM (1) //アニメーションの最大数
@@ -613,6 +615,10 @@ void HitPlayer(HIT hit, int amount)
 			//サウンド
 
 			PlaySound(SOUND_LABEL_SE_PLAYERHIT);
+
+			//ダメージスクリーン
+
+			SetDamageScreen();
 
 			//プレイヤーのライフを減らす
 

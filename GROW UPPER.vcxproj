@@ -149,6 +149,7 @@
     <ClCompile Include="bomb.cpp" />
     <ClCompile Include="boss.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="damagescreen.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="energy.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="bomb.h" />
     <ClInclude Include="boss.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="damagescreen.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="energy.h" />
