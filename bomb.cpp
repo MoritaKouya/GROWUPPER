@@ -15,7 +15,7 @@
 
 //マクロ定義
 
-#define MAX_BOMB (128) //ボムの最大数
+#define MAX_BOMB (12) //ボムの最大数
 
 #define BOMB_DIAGONAL (150) //ボムの半径の最大
 
@@ -27,7 +27,7 @@ LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffBomb = NULL; //頂点バッファへのポインタ
 
 Bomb g_aBomb[MAX_BOMB]; //ボムの情報
 
-const char* g_aBombTexture_Path = "Data/TEXTURE/ENEMY/bomb000.png";
+const char* g_aBombTexture_Path = "Data/TEXTURE/ENEMY/bomb000.png"; //テクスチャの相対パス
 
 //================
 //ボムの初期化処理
@@ -284,6 +284,8 @@ void DrawBomb(void)
 //==============
 void SetBomb(D3DXVECTOR3 pos,int nDamage)
 {
+	//サウンド
+
 	PlaySound(SOUND_LABEL_SE_EXPLOSION);
 
 	int nCntBomb;
@@ -352,7 +354,7 @@ void CollisionPlayer(Bomb* pBomb)
 {
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //敵の情報の先頭アドレスが代入される
+	Player* pPlayer = GetPlayer(); //敵の情報のが代入される
 
 	//中心座標の距離（ｘ、ｙ）
 

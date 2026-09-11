@@ -47,7 +47,7 @@ const char* g_aRankingScoreTexture_Path[SCORE_MAX] =
 	"Data/TEXTURE/NUMBER/number002.png",
 
 	"Data/TEXTURE/NUMBER/number003.png",
-}; //テクスチャのアドレスの構造体
+}; //テクスチャの相対パスの構造体
 
 //========================
 // ランキングスコアの初期化処理	

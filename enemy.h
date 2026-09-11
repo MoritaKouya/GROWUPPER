@@ -11,7 +11,7 @@
 
 //マクロ定義
 
-#define MAX_ENEMY (64) //敵の最大数
+#define MAX_ENEMY (32) //敵の最大数
 
 #define ENEMY_DIAGONAL (50) //敵の中心からの対角線の長さ
 

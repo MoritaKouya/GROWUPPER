@@ -19,7 +19,7 @@ LPDIRECT3DTEXTURE9 g_pTexturePauseText = NULL; //テクスチャへのポインタ
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffPauseText = NULL; //頂点バッファのポインタ
 
 //=========================
-//ポーズ画面の初期化処理
+//ポーズ画面の文字初期化処理
 //=========================
 void InitPauseText(void)
 {
@@ -117,7 +117,7 @@ void InitPauseText(void)
 }
 
 //=========================
-//ポーズ画面の終了処理
+//ポーズ画面の文字終了処理
 //=========================
 void UninitPauseText(void)
 {
@@ -139,7 +139,7 @@ void UninitPauseText(void)
 }
 
 //=========================
-//ポーズ画面の更新処理
+//ポーズ画面の文字更新処理
 //=========================
 void UpdatePauseText(void)
 {
@@ -147,7 +147,7 @@ void UpdatePauseText(void)
 }
 
 //=========================
-//ポーズ画面の描画処理
+//ポーズ画面の文字描画処理
 //=========================
 void DrawPauseText(void)
 {

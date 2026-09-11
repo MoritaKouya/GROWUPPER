@@ -5,7 +5,6 @@
 // 
 //=============================
 #ifndef _EFFECT_H_
-
 #define _EFFECT_H_
 
 #include "main.h"

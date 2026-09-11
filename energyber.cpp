@@ -50,7 +50,7 @@ void InitEnergyBer(void)
 
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //敵の情報の先頭アドレスが代入される	
+	Player* pPlayer = GetPlayer(); //敵の情報のが代入される	
 
 	//頂点バッファの生成
 

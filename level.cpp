@@ -64,7 +64,7 @@ void InitLevel(void)
 
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //敵の情報の先頭アドレスが代入される	
+	Player* pPlayer = GetPlayer(); //敵の情報のが代入される	
 
 	//レベルをグローバル変数に代入
 
@@ -244,7 +244,7 @@ void DrawLevel(void)
 		}
 	}
 
-	DrawLevelText();
+	DrawLevelText(); //レベルの文字
 }
 
 //========================

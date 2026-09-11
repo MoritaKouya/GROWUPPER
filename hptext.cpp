@@ -14,9 +14,9 @@
 
 //グローバル変数
 
-LPDIRECT3DTEXTURE9 g_pTextureHpText = NULL;
+LPDIRECT3DTEXTURE9 g_pTextureHpText = NULL; //テクスチャのポインタ
 
-LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffHpText = NULL;
+LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffHpText = NULL; //頂点バッファのポインタ
 
 //=========================
 // Hpテキストの初期化処理

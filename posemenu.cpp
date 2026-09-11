@@ -308,6 +308,10 @@ void UpdatePauseMenu(void)
 
 		case PAUSEMENU_1: //リトライ
 
+			//サウンド
+
+			StopSound(SOUND_LABEL_BGM001);
+
 			//モードの設定
 
 			SetFade(MODE_GAME); //もう一度ゲームモード

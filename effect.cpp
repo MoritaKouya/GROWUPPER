@@ -236,6 +236,8 @@ void UpdateEffect(void)
 			pVtx[3].col = g_aEffect[nCntEffect].col;
 		}
 
+		//Žõ–½‚ðŒ¸‚ç‚·
+
 		g_aEffect[nCntEffect].nLife--;
 
 		if (g_aEffect[nCntEffect].nLife <= 0)//Žõ–½‚ªs‚«‚½

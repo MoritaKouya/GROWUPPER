@@ -36,7 +36,7 @@ typedef struct
 
 	int nEnergy; //エネルギーの量
 
-	float nAnglePlayer; //プレイヤーとの角度
+	float fAnglePlayer; //プレイヤーとの角度
 
 	float fSpeed; //移動速度
 

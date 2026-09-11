@@ -73,7 +73,7 @@ const char* g_aPlayerTexture_Path[PLAYER_MAX] =
 	"Data/TEXTURE/PLAYER/player007.png",
 
 	"Data/TEXTURE/PLAYER/player008.png",
-}; //テクスチャのアドレスの構造体
+}; //テクスチャの相対パスの構造体
 
 //==================================
 // プレイヤーの初期化処理
@@ -596,7 +596,7 @@ void DrawPlayer(void)
 //===================
 Player* GetPlayer(void)
 {
-	return &g_player; //敵の情報の先頭アドレスを返す
+	return &g_player; //敵の情報を返す
 }
 
 //===================
@@ -636,7 +636,7 @@ void HitPlayer(HIT hit, int amount)
 			}
 			else
 			{
-				//カウンターを加算
+				//カウンターを設定
 
 				g_player.nCounterState = 75;
 
@@ -679,13 +679,16 @@ void HitPlayer(HIT hit, int amount)
 
 			LevelUpp(&g_player.nLevel); //レベル
 
-			g_player.nAttack += g_player.nLevel;
+			//ステータスの上昇
 
-			g_player.nGguard += 1;
+			g_player.nAttack += g_player.nLevel; //攻撃力
+
+			g_player.nGguard += 1; //防御力
 
 			if (g_player.nLevel % 5 == 0)
-			{
-				g_player.nRate += 1;
+			{ //レベルが５の倍数分上がったら
+
+				g_player.nRate += 1; //連射力
 			}
 		}
 

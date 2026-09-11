@@ -399,20 +399,20 @@ void MoveBoss(void)
 
 	if (g_Boss.pos.x - BOSS_DIAGONAL < 0) //一番左に当たった場合
 	{
-		g_Boss.pos.x = BOSS_DIAGONAL; //g_player.posを一番左にする
+		g_Boss.pos.x = BOSS_DIAGONAL; //g_Boss.posを一番左にする
 	}
 	else if (SCREEN_WIDTH < g_Boss.pos.x + BOSS_DIAGONAL) //一番右に当たった場合
 	{
-		g_Boss.pos.x = SCREEN_WIDTH - BOSS_DIAGONAL; //g_player.posを一番右にする
+		g_Boss.pos.x = SCREEN_WIDTH - BOSS_DIAGONAL; //g_Boss.posを一番右にする
 	}
 
 	if (g_Boss.pos.y - BOSS_DIAGONAL < 0) //一番上にあたった場合
 	{
-		g_Boss.pos.y = BOSS_DIAGONAL; //g_player.posを一番上にする
+		g_Boss.pos.y = BOSS_DIAGONAL; //g_Boss.posを一番上にする
 	}
 	else if (SCREEN_HEIGHT < g_Boss.pos.y + BOSS_DIAGONAL) //一番下にあたった場合
 	{
-		g_Boss.pos.y = SCREEN_HEIGHT - BOSS_DIAGONAL; //g_player.posを一番下にする
+		g_Boss.pos.y = SCREEN_HEIGHT - BOSS_DIAGONAL; //g_Boss.posを一番下にする
 	}
 
 	//頂点情報の設定
@@ -506,7 +506,7 @@ void DrawBoss(void)
 //===================
 BOSS* GetBoss(void)
 {
-	return &g_Boss; //ボスの情報の先頭アドレスを返す
+	return &g_Boss; //ボスの情報を返す
 }
 
 //===================
@@ -530,8 +530,6 @@ float CalcAnglePlayer(void)
 //===================
 float CalcAngleCenter(void)
 {
-	Player* pPlayer = GetPlayer(); //プレイヤーの情報
-
 	float dx = (SCREEN_WIDTH / 2) - g_Boss.pos.x; //x座標の差
 
 	float dy = (SCREEN_HEIGHT / 2) - g_Boss.pos.y; //y座標の差
@@ -583,7 +581,7 @@ void CollisionPlayer(BOSS* Boss)
 {
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //ボスの情報の先頭アドレスが代入される
+	Player* pPlayer = GetPlayer(); //プレイヤーの情報
 
 	//中心座標の距離（ｘ、ｙ）
 

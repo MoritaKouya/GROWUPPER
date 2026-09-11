@@ -64,7 +64,7 @@ void InitBg(void)
 	{
 		D3DXCreateTextureFromFile(pDevice,
 
-		g_aBgTexture_Path[nCntBG], //テクスチャのファイル名
+		g_aBgTexture_Path[nCntBG],
 
 		&g_apTextureBG[nCntBG]);
 	}

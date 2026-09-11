@@ -460,7 +460,7 @@ bool FlagEnemy(D3DXVECTOR3 posenemy)
 
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //プレイヤーの情報の先頭アドレスが代入される
+	Player* pPlayer = GetPlayer(); //プレイヤーの情報のが代入される
 
 	//中心座標の距離（ｘ、ｙ）
 
@@ -490,5 +490,5 @@ bool FlagEnemy(D3DXVECTOR3 posenemy)
 //=========================
 void SetPause(void)
 {
-	g_bPause = g_bPause ^ 1;
+	g_bPause = g_bPause ^ 1; //ポーズの切り替え
 }

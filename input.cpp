@@ -347,11 +347,12 @@ D3DXVECTOR3 GetLeftStickTrigger()
 bool GetRT()
 {
 	if (g_joyKeyState.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
-	{
+	{ //RTƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚Ä‚¢‚½ê‡
+
 		return true;
 	}
 	else
-	{
+	{ //‰Ÿ‚µ‚Ä‚¢‚È‚©‚Á‚½ê‡
 		return false;
 	}
 }

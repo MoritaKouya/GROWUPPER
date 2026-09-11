@@ -73,7 +73,7 @@ const char* g_aChartTexture_Path[ALPHABETCHART_MAX] =
 
 	"Data/TEXTURE/SET/alphabetchart001.png",
 
-}; //テクスチャのアドレスの構造体
+}; //テクスチャの相対パスの構造体
 
 int g_ChartType; //表の種類を代入
 

@@ -52,7 +52,7 @@ void InitEnergy(void)
 
 		g_aEnergy[nCntEnergy].nEnergy = 1; //エネルギー量
 
-		g_aEnergy[nCntEnergy].nAnglePlayer = 0.0f;
+		g_aEnergy[nCntEnergy].fAnglePlayer = 0.0f;
 
 		g_aEnergy[nCntEnergy].fSpeed = 10;
 
@@ -185,15 +185,15 @@ void UpdateEnergy(void)
 
 			//プレイヤーとの向き
 
-			g_aEnergy[nCntEnergy].nAnglePlayer = CalcAngleEnergy(g_aEnergy[nCntEnergy].pos);
+			g_aEnergy[nCntEnergy].fAnglePlayer = CalcAngleEnergy(g_aEnergy[nCntEnergy].pos);
 
 			//移動量の設定
 
 			g_aEnergy[nCntEnergy].move = D3DXVECTOR3(
 
-				cosf(g_aEnergy[nCntEnergy].nAnglePlayer) * g_aEnergy[nCntEnergy].fSpeed,
+				cosf(g_aEnergy[nCntEnergy].fAnglePlayer) * g_aEnergy[nCntEnergy].fSpeed,
 
-				sinf(g_aEnergy[nCntEnergy].nAnglePlayer) * g_aEnergy[nCntEnergy].fSpeed,
+				sinf(g_aEnergy[nCntEnergy].fAnglePlayer) * g_aEnergy[nCntEnergy].fSpeed,
 
 				0.0f);
 
@@ -376,7 +376,7 @@ void CollisionPlayer(Energy* pEnergy)
 {
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //敵の情報の先頭アドレスが代入される	
+	Player* pPlayer = GetPlayer(); //敵の情報のが代入される	
 //中心座標の距離（ｘ、ｙ）
 
 	float fDistance_x = pPlayer->pos.x - pEnergy->pos.x, //距離ｘ

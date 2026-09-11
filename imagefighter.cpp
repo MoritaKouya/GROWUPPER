@@ -11,7 +11,7 @@
 
 //マクロ定義
 
-#define IMAGE_DIAGONAL (300)
+#define IMAGE_DIAGONAL (300) //イメージ画像の大きさ
 
 #define IMAGEINPUT_TIME_INTERVAL (15) //入力の間隔
 
@@ -21,7 +21,7 @@ int g_nSelect;
 
 int g_nImageInputCounter; //プレイヤーのイメージの選択間隔のカウンター
 
-Image g_Image; //イメージ
+Image g_Image; //イメージ画像
 
 LPDIRECT3DTEXTURE9 g_pTextureImage[PLAYER_MAX] = {}; //テクスチャのポインタ
 

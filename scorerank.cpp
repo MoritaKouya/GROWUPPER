@@ -53,7 +53,7 @@ const char* g_aScoreRankTexture_Path[SCORERANK_MAX] =
 	"Data/TEXTURE/SCORERANK/scorerank002.png",
 
 	"Data/TEXTURE/SCORERANK/scorerank003.png",
-}; //テクスチャのアドレスの構造体
+}; //テクスチャの相対パスの構造体
 
 //=========================
 // スコアランクの初期化処理

@@ -25,7 +25,7 @@ const char* g_aChartTexture_Path2[ALPHABETCHART_MAX] =
 
 	"Data/TEXTURE/SET/alphabetchart001.png",
 
-}; //テクスチャのアドレスの構造体
+}; //テクスチャの相対パスの構造体
 
 Name g_aName[MAX_NAME]; //名前の情報を代入する変数
 

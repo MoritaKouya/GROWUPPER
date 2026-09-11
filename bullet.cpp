@@ -61,15 +61,15 @@ void InitBullet(void)
 
 	for (nCntBullet = 0; nCntBullet < MAX_BULLET; nCntBullet++)
 	{
-		g_aBullet[nCntBullet].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_aBullet[nCntBullet].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f); //位置
 
-		g_aBullet[nCntBullet].move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		g_aBullet[nCntBullet].move = D3DXVECTOR3(0.0f, 0.0f, 0.0f); //移動量
 
-		g_aBullet[nCntBullet].nLife = 0;
+		g_aBullet[nCntBullet].nLife = 0; //寿命
 
-		g_aBullet[nCntBullet].nDamage = 0;
+		g_aBullet[nCntBullet].nDamage = 0; //ダメージ
 
-		g_aBullet[nCntBullet].type = BULLETTYPE_PLAYER;
+		g_aBullet[nCntBullet].type = BULLETTYPE_PLAYER; //タイプ
 
 		g_aBullet[nCntBullet].bUse = false; //使用していない状態にする
 	}
@@ -425,7 +425,7 @@ void CollisionEnemy(Bullet* pBullet)
 
 	//敵の取得
 
-	Enemy* pEnemy = GetEnemy(); //敵の情報の先頭アドレスが代入される
+	Enemy* pEnemy = GetEnemy(); //敵の情報が代入される
 
 	for (nCntEnemy = 0; nCntEnemy < MAX_ENEMY; nCntEnemy++, pEnemy++)
 	{
@@ -468,7 +468,7 @@ void CollisionBoss(Bullet* pBullet)
 {
 	//ボスの取得
 
-	BOSS* pBoss = GetBoss(); //ボスの情報の先頭アドレスが代入される
+	BOSS* pBoss = GetBoss(); //ボスの情報が代入される
 
 	Player* pPlayer = GetPlayer();
 
@@ -506,7 +506,7 @@ void CollisionPlayer(Bullet* pBullet)
 {
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //敵の情報の先頭アドレスが代入される
+	Player* pPlayer = GetPlayer(); //敵の情報が代入される
 
 	//中心座標の距離（ｘ、ｙ）
 

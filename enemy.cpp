@@ -40,7 +40,7 @@ const char* g_aEnemyTexture_Path[ENEMYTYPE_MAX] =
 	"Data/TEXTURE/ENEMY/enemy003.png",
 
 	"Data/TEXTURE/ENEMY/enemy004.png",
-}; //テクスチャのアドレスのパス
+}; //テクスチャの相対パスのパス
 
 //===================
 // 敵の初期化処理
@@ -651,17 +651,19 @@ void SetEnemy(D3DXVECTOR3 pos, ENEMYTYPE type)
 		{
 			//敵の情報の設定(Enemy構造体)
 
-			g_aEnemy[nCntEnemy].pos = pos;
+			g_aEnemy[nCntEnemy].pos = pos; //位置
 
-			g_aEnemy[nCntEnemy].move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+			g_aEnemy[nCntEnemy].move = D3DXVECTOR3(0.0f, 0.0f, 0.0f); //移動量
 
-			g_aEnemy[nCntEnemy].type = type;
+			g_aEnemy[nCntEnemy].type = type; //タイプ
 
-			g_aEnemy[nCntEnemy].nCounterAction = 0;
+			g_aEnemy[nCntEnemy].nCounterAction = 0; //アニメーション
 
-			g_aEnemy[nCntEnemy].nLife = 3;
+			g_aEnemy[nCntEnemy].nLife = 3; //ライフ
 
-			g_aEnemy[nCntEnemy].nEnergy = 1;
+			g_aEnemy[nCntEnemy].nEnergy = 1; //エネルギー
+
+			//後でファイル読み込みにする
 
 			switch(g_aEnemy[nCntEnemy].type) //タイプで比較
 			{
@@ -695,6 +697,8 @@ void SetEnemy(D3DXVECTOR3 pos, ENEMYTYPE type)
 
 				break;
 			}
+
+			//敵を使用している状態にする
 
 			g_aEnemy[nCntEnemy].bUse = true;
 
@@ -748,6 +752,8 @@ void SetEnemy(D3DXVECTOR3 pos, ENEMYTYPE type)
 //===================
 void HitEnemy(int nCntEnemy, int nDamage)
 {
+	//ライフを減らす
+	
 	g_aEnemy[nCntEnemy].nLife -= nDamage;
 
 	//サウンド
@@ -770,7 +776,7 @@ void HitEnemy(int nCntEnemy, int nDamage)
 
 		g_aEnemy[nCntEnemy].bUse = false; //敵を使用していない状態にする
 
-		g_nNumEnemy--;
+		g_nNumEnemy--; //敵の総数を減らす
 	}
  	else
 	{
@@ -778,7 +784,7 @@ void HitEnemy(int nCntEnemy, int nDamage)
 
 		g_aEnemy[nCntEnemy].state = ENEMYSTATE_DAMAGE; //ダメージを与える
 
-		g_aEnemy[nCntEnemy].nCounterState = 5;
+		g_aEnemy[nCntEnemy].nCounterState = 5; //状態カウンターを設定
 
 		VERTEX_2D* pVtx; //forの前でロック、後でアンロック
 
@@ -808,7 +814,7 @@ void CollisionPlayer(Enemy* pEnemy)
 {
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //敵の情報の先頭アドレスが代入される
+	Player* pPlayer = GetPlayer(); //敵の情報が代入される
 
 	//中心座標の距離（ｘ、ｙ）
 
@@ -836,7 +842,7 @@ void CollisionPlayer(Enemy* pEnemy)
 //===================
 Enemy* GetEnemy(void)
 {
-	return &g_aEnemy[0]; //敵の情報の先頭アドレスを返す
+	return &g_aEnemy[0]; //敵の情報を返す
 }
 //===================
 // プレイヤーとの角度計算

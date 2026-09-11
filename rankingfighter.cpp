@@ -37,7 +37,7 @@ const char* g_aRankingFighterTexture_Path[PLAYER_MAX] =
 	"Data/TEXTURE/PLAYER/player007.png",
 
 	"Data/TEXTURE/PLAYER/player008.png",
-}; //プレイヤーの画像のアドレスの配列
+}; //プレイヤーの画像の相対パスの配列
 
 //==================================
 //ランキングの機体の描画処理 
