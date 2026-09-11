@@ -158,6 +158,8 @@
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="frame.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="hp.cpp" />
+    <ClCompile Include="hpdelay.cpp" />
     <ClCompile Include="startcountdown.cpp" />
     <ClCompile Include="startcountdownber.cpp" />
     <ClCompile Include="startcoutdowntext.cpp" />
@@ -208,6 +210,8 @@
     <ClInclude Include="fade.h" />
     <ClInclude Include="frame.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="hp.h" />
+    <ClInclude Include="hpdelay.h" />
     <ClInclude Include="startcountdownber.h" />
     <ClInclude Include="startcountdowntext.h" />
     <ClInclude Include="hptext.h" />

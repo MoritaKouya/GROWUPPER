@@ -18,7 +18,6 @@
 #include "level.h"
 #include "fade.h"
 #include "energyber.h"
-#include "hpber.h"
 #include "playereffect.h"
 #include "boss.h"
 #include "bomb.h"
@@ -27,9 +26,9 @@
 #include "inputname.h"
 #include "outputname.h"
 #include "pause.h"
-#include "hptext.h"
 #include "damagescreen.h"
 #include "startcountdown.h"
+#include "hp.h"
 
 //マクロ定義
 
@@ -58,9 +57,7 @@ void InitGame(void)
 
 	InitPlayerEffect(); //プレイヤーエフェクト処理
 
-	InitHpText(); //HPの文字
-
-	InitHpBer(); //hpバーの初期化
+	InitHp(); //hpの初期化
 
 	//レベルの初期化
 
@@ -130,7 +127,7 @@ void InitGame(void)
 
 	while(GetNumEnemy() < 5)
 	{
-		int nType = rand() % ENEMYTYPE_MAX; //ランダムで敵のタイプを決める
+		int nType = rand() % ENEMYTYPE_4; //ランダムで敵のタイプを決める（ボムUFO以外の）
 
 		ENEMYTYPE type = (ENEMYTYPE)nType; //タイプを代入する
 
@@ -165,9 +162,7 @@ void UninitGame(void)
 
 	UninitPlayerEffect(); //プレイヤーエフェクトの終了処理
 
-	UninitHpText(); //HPの文字
-
-	UninitHpBer(); //hpバーの終了処理
+	UninitHp(); //hpの終了処理
 
 	//レベルの終了処理
 
@@ -276,9 +271,7 @@ void UpdateGame(void)
 
 				UpdatePlayerEffect(); //プレイヤーエフェクトの更新処理
 
-				UpdateHpText(); //HPの文字
-
-				UpdateHpBer(); //hpバーの更新処理
+				UpdateHp(); //hpの更新処理
 
 				//レベルの更新
 
@@ -429,9 +422,7 @@ void DrawGame(void)
 
 	//hpバーの描画処理
 
-    DrawHpText(); //HPの文字
-
-	DrawHpBer();
+	DrawHp(); //hpの描画処理
 
 	//名前の表示の描画処理
 

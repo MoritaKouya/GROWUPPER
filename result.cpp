@@ -19,6 +19,19 @@
 
 #define FILE_RANKING "Data/SAVEDATA/Ranking.csv" //ランキングを保存するテキストファイル
 
+//リザルト画面の表示の列挙型定義
+
+typedef enum
+{
+	RESULTOUTPUT_0 = 0, //スコアの文字
+
+	RESULTOUTPUT_1, //スコアの値
+
+	RESULTOUTPUT_2, //スコアランク
+
+	RESULTOUTPUT_MAX //最大数
+
+}RESULTOUTPUT;
 //リザルトのモードの列挙型定義
 
 typedef enum
@@ -32,6 +45,8 @@ typedef enum
 
 //グローバル変数宣言
 
+int g_OutputResult; //リザルト画面の表示するものを代入する
+
 int g_nResultMode; //現在のモードを代入する変数
 
 RankingPlayer g_aRanking[NUM_RANKINGPLAYER]; //ランキングの情報構造体
@@ -41,6 +56,10 @@ RankingPlayer g_aRanking[NUM_RANKINGPLAYER]; //ランキングの情報構造体
 //==================================
 void InitResult(void)
 {
+	//表示するものの初期化
+	
+	g_OutputResult = RESULTOUTPUT_0;
+
 	//モードの初期化
 
 	g_nResultMode = RESULTMODE_0;
@@ -135,7 +154,14 @@ void UpdateResult(void)
 			{
 			case RESULTMODE_0: //リザルト画面の場合
 
-				g_nResultMode = RESULTMODE_1; //ランキング画面
+				if (RESULTOUTPUT_MAX - 1 == g_OutputResult)
+				{
+					g_nResultMode = RESULTMODE_1; //ランキング画面
+				}
+				else
+				{
+					g_OutputResult++;
+				}			
 
 				break;
 
@@ -177,9 +203,15 @@ void DrawResult(void)
 
 		DrawScoreText(); //スコアの文字
 
-		DrawScore(); //スコア
+		if (RESULTOUTPUT_1 <= g_OutputResult)
+		{
+			DrawScore(); //スコア
+		}
 
-		DrawScoreRank(); //スコアランク
+		if (RESULTOUTPUT_2 <= g_OutputResult)
+		{
+			DrawScoreRank(); //スコアランク
+		}
 
 		break;
 
