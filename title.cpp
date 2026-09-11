@@ -173,22 +173,22 @@ void UninitTitle(void)
 //==================================
 void UpdateTitle(void)
 {
-	//各オブジェクトの更新処理
+	//フェードの獲得
 
-	UpdateBg(); //Bg
+	FADE fade = GetFade();
 
-	UpdateTitleMenu(); //タイトルメニュー
+	if (fade == FADE_NONE) //フェードしていない場合
+	{
+		//各オブジェクトの更新処理
 
-	if (GetKeyboardTrigger(DIK_RETURN) == true || GetJoypadTrigger(JOYKEY_A))
-	{ //決定キーが押された
+		UpdateBg(); //Bg
 
-		//フェードの獲得
+		UpdateTitleMenu(); //タイトルメニュー
 
-		FADE fade = GetFade();
+		if (GetKeyboardTrigger(DIK_RETURN) == true || GetJoypadTrigger(JOYKEY_A))
+		{ //決定キーが押された
 
-		if (fade == FADE_NONE) //フェードしていない場合
-		{
-			//サウンド
+				//サウンド
 
 			PlaySound(SOUND_LABEL_SE_ENTER);
 
@@ -212,6 +212,7 @@ void UpdateTitle(void)
 
 				break;
 			}
+
 		}
 	}
 }

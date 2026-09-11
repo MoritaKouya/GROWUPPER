@@ -82,6 +82,8 @@ void Initimagefighter(void)
 
 	//イメージの情報の初期化
 
+	g_nSelect = PLAYER_1;
+
 	g_Image.tex = PLAYER_1;
 
 	//選択の間隔の初期化
