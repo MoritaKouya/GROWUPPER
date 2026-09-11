@@ -230,14 +230,14 @@ void UpdateTutorial(void)
 				else
 				{ //最後じゃない場合
 
-					//矢印の状態設定
-
-					SetStateTutorialArrow(1);
-
 					//テクスチャを次のものにする
 
 					g_Tex++;
 				}
+
+				//矢印の状態設定
+
+				SetStateTutorialArrow(1);
 
 				g_TutorialInputCounter = TUTORIALINPUT_TIME_INTERVAL;
 			}

@@ -58,6 +58,10 @@ SOUNDINFO g_aSoundInfo[SOUND_LABEL_MAX] =
 
 	{"data/SE/shutter000.wav", 0},	// エネルギー
 	{"data/SE/shutter001.wav", 0},// レベルアップ
+
+	//カウントダウン
+
+	{"data/SE/Countdown.wav", 0},// レベルアップ
 };
 
 //=============================================================================

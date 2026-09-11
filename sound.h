@@ -37,9 +37,13 @@ typedef enum
 
 	//フェード
 
-	SOUND_LABEL_SE_FADE001,
+	SOUND_LABEL_SE_FADE001, //フェードアウト
 
-	SOUND_LABEL_SE_FADE002,
+	SOUND_LABEL_SE_FADE002, //フェードイン
+
+	//カウントダウン
+
+	SOUND_LABEL_SE_COUNTDOWN, //カウントダウン
 
 	SOUND_LABEL_MAX,
 } SOUND_LABEL;

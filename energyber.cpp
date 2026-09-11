@@ -212,7 +212,7 @@ void DrawEnergyBer(void)
 //========================
 void AddEnergyBer(int nCntEnergy, int nLevel)
 {
-	float nBer;
+	float fBer;
 
 	VERTEX_2D* pVtx; //頂点情報へのポインタ
 
@@ -222,17 +222,17 @@ void AddEnergyBer(int nCntEnergy, int nLevel)
 
 	//エネルギーバーのX軸の割合
 
-	nBer = (float)nCntEnergy / (REQUIRED_ENERGY * nLevel);
+	fBer = (float)nCntEnergy / (REQUIRED_ENERGY * nLevel);
 
 	//テクスチャ座標の設定
 
 	pVtx[4].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X, g_posEnergyBer.y - SIZE_ENERGY_Y, 0.0f);
 
-	pVtx[5].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X + ((SIZE_ENERGY_X * 2) * nBer), g_posEnergyBer.y - 20, 0.0f);
+	pVtx[5].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X + ((SIZE_ENERGY_X * 2) * fBer), g_posEnergyBer.y - 20, 0.0f);
 
 	pVtx[6].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X, g_posEnergyBer.y + SIZE_ENERGY_Y, 0.0f);
 
-	pVtx[7].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X + ((SIZE_ENERGY_X* 2) * nBer), g_posEnergyBer.y + 20, 0.0f);
+	pVtx[7].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X + ((SIZE_ENERGY_X* 2) * fBer), g_posEnergyBer.y + 20, 0.0f);
 
 	//頂点バッファをアンロックする
 
