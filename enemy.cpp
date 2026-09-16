@@ -828,7 +828,7 @@ void CollisionPlayer(Enemy* pEnemy)
 
 	//‚Q‚Â‚Ì‰~‚Ì”¼Œa‚Ì‡Œv
 
-	float fTotalRadius = (ENEMY_DIAGONAL + PLAYER_DIAGONAL); //”¼Œa‚Ì‡Œv‚Ì’·‚³
+	float fTotalRadius = (ENEMY_DIAGONAL + pPlayer->fLength); //”¼Œa‚Ì‡Œv‚Ì’·‚³
 
 	if (fDistanceSquared <= fTotalRadius * fTotalRadius) //”¼Œa‚Ì‡Œv‚Ì‚Qæ‚æ‚è‹——£‚Ì‚Qæ‚ª¬‚³‚¢ê‡
 	{//“G‚ÆƒvƒŒƒCƒ„[‚ª“–‚½‚Á‚½

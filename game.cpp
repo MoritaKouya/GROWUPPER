@@ -29,6 +29,7 @@
 #include "damagescreen.h"
 #include "startcountdown.h"
 #include "hp.h"
+#include "score_deltascore.h"
 
 //マクロ定義
 
@@ -209,6 +210,10 @@ void UninitGame(void)
 	//ダメージスクリーン
 
 	UninitDamageScreen();
+
+	//スコア
+
+	UninitDeltaScore(); //スコアの増加量表示
 
 	//スタートカウントダウン
 	

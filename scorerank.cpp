@@ -15,6 +15,8 @@
 
 #define SCORERANK_SIZE_Y (225) //縦の半径
 
+#define SCORERANK_EXPLUS (15000000) //EXの範囲
+
 #define SCORERANK_EX (10000000) //EXの範囲
 
 #define SCORERANK_A (5000000) //Aの範囲
@@ -32,6 +34,8 @@ typedef enum
 	SCORERANK_2, //A
 
 	SCORERANK_3, //EX
+
+	SCORERANK_4, //EX+
 
 	SCORERANK_MAX //最大数
 }SCORERANK_TEXTURE;
@@ -53,6 +57,8 @@ const char* g_aScoreRankTexture_Path[SCORERANK_MAX] =
 	"Data/TEXTURE/SCORERANK/scorerank002.png",
 
 	"Data/TEXTURE/SCORERANK/scorerank003.png",
+
+	"Data/TEXTURE/SCORERANK/scorerank004.png",
 }; //テクスチャの相対パスの構造体
 
 //=========================
@@ -86,8 +92,12 @@ void InitScoreRank(void)
 	//スコアランクの代入
 
 	nScore = GetScore();
-
-	if (SCORERANK_EX <= nScore)
+	
+	if(SCORERANK_EXPLUS <= nScore)
+	{
+		g_ScoreRank = SCORERANK_4;
+	}
+	else if (SCORERANK_EX <= nScore)
 	{
 		g_ScoreRank = SCORERANK_3;
 	}

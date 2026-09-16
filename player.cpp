@@ -46,8 +46,6 @@ int g_nCountterAnimPlayer; //アニメーションカウンター
 
 int g_nPatternAnimPlayer; //アニメーションパターンNo,
 
-float g_fLengthPlayer; //対角線の長さ
-
 float g_fAnglePlayer; //対角線の角度
 
 Player g_player; //プレイヤーの情報
@@ -118,6 +116,8 @@ void InitPlayer(void)
 
 	g_player.nBulletCounter = 0; //球のカウンター
 
+	g_player.fLength = sqrtf(100 * 100 + 100 * 100) * 0.5f; //対角線の長さを算出する
+
 	g_player.nCntEnergy = 0; //エネルギー
 
 	g_player.nLevel = 1; //レベル
@@ -133,10 +133,6 @@ void InitPlayer(void)
 	//向きの初期化
 
 	g_rot = false;
-
-	//対角線の長さを算出する
-
-	g_fLengthPlayer = sqrtf(100 * 100 + 100 * 100) * 0.5f;
 
 	//対角線の角度を算出する
 
@@ -169,27 +165,27 @@ void InitPlayer(void)
 
 	//頂点座標の設定
 
-	pVtx[0].pos.x = g_player.pos.x + sinf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_fLengthPlayer;
+	pVtx[0].pos.x = g_player.pos.x + sinf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
 
-	pVtx[0].pos.y = g_player.pos.y + cosf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_fLengthPlayer;
+	pVtx[0].pos.y = g_player.pos.y + cosf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
 
 	pVtx[0].pos.z = 0.0f;
 
-	pVtx[1].pos.x = g_player.pos.x + sinf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_fLengthPlayer;
+	pVtx[1].pos.x = g_player.pos.x + sinf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
 
-	pVtx[1].pos.y = g_player.pos.y + cosf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_fLengthPlayer;
+	pVtx[1].pos.y = g_player.pos.y + cosf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
 
 	pVtx[1].pos.z = 0.0f;
 
-	pVtx[2].pos.x = g_player.pos.x + sinf(g_player.rot.z + -g_fAnglePlayer) * g_fLengthPlayer;
+	pVtx[2].pos.x = g_player.pos.x + sinf(g_player.rot.z + -g_fAnglePlayer) * g_player.fLength;
 
-	pVtx[2].pos.y = g_player.pos.y + cosf(g_player.rot.z + -g_fAnglePlayer) * g_fLengthPlayer;
+	pVtx[2].pos.y = g_player.pos.y + cosf(g_player.rot.z + -g_fAnglePlayer) * g_player.fLength;
 
 	pVtx[2].pos.z = 0.0f;
 
-	pVtx[3].pos.x = g_player.pos.x + sinf(g_player.rot.z + g_fAnglePlayer) * g_fLengthPlayer;
+	pVtx[3].pos.x = g_player.pos.x + sinf(g_player.rot.z + g_fAnglePlayer) * g_player.fLength;
 
-	pVtx[3].pos.y = g_player.pos.y + cosf(g_player.rot.z + g_fAnglePlayer) * g_fLengthPlayer;
+	pVtx[3].pos.y = g_player.pos.y + cosf(g_player.rot.z + g_fAnglePlayer) * g_player.fLength;
 
 	pVtx[3].pos.z = 0.0f;
 
@@ -377,22 +373,22 @@ void MovePlayer(void)
 
 	//壁に当たった時
 
-	if (g_player.pos.x - PLAYER_DIAGONAL < 0) //一番左に当たった場合
+	if (g_player.pos.x - g_player.fLength < 0) //一番左に当たった場合
 	{
-		g_player.pos.x = PLAYER_DIAGONAL; //g_player.posを一番左にする
+		g_player.pos.x = g_player.fLength; //g_player.posを一番左にする
 	}
-	else if (SCREEN_WIDTH < g_player.pos.x + PLAYER_DIAGONAL) //一番右に当たった場合
+	else if (SCREEN_WIDTH < g_player.pos.x + g_player.fLength) //一番右に当たった場合
 	{
-		g_player.pos.x = SCREEN_WIDTH - PLAYER_DIAGONAL; //g_player.posを一番右にする
+		g_player.pos.x = SCREEN_WIDTH - g_player.fLength; //g_player.posを一番右にする
 	}
 
-	if (g_player.pos.y - PLAYER_DIAGONAL < 0) //一番上にあたった場合
+	if (g_player.pos.y - g_player.fLength < 0) //一番上にあたった場合
 	{
-		g_player.pos.y = PLAYER_DIAGONAL; //g_player.posを一番上にする
+		g_player.pos.y = g_player.fLength; //g_player.posを一番上にする
 	}
-	else if (SCREEN_HEIGHT < g_player.pos.y + PLAYER_DIAGONAL) //一番下にあたった場合
+	else if (SCREEN_HEIGHT < g_player.pos.y + g_player.fLength) //一番下にあたった場合
 	{
-		g_player.pos.y = SCREEN_HEIGHT - PLAYER_DIAGONAL; //g_player.posを一番下にする
+		g_player.pos.y = SCREEN_HEIGHT - g_player.fLength; //g_player.posを一番下にする
 	}
 
 	//移動量の更新
@@ -407,27 +403,27 @@ void MovePlayer(void)
 
 	g_pVtxBuffPlayer->Lock(0, 0, (void**)&pVtx, 0);
 
-	pVtx[0].pos.x = g_player.pos.x + sinf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_fLengthPlayer;
+	pVtx[0].pos.x = g_player.pos.x + sinf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
 
-	pVtx[0].pos.y = g_player.pos.y + cosf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_fLengthPlayer;
+	pVtx[0].pos.y = g_player.pos.y + cosf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
 
 	pVtx[0].pos.z = 0.0f;
 
-	pVtx[1].pos.x = g_player.pos.x + sinf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_fLengthPlayer;
+	pVtx[1].pos.x = g_player.pos.x + sinf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
 
-	pVtx[1].pos.y = g_player.pos.y + cosf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_fLengthPlayer;
+	pVtx[1].pos.y = g_player.pos.y + cosf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
 
 	pVtx[1].pos.z = 0.0f;
 
-	pVtx[2].pos.x = g_player.pos.x + sinf(g_player.rot.z + -g_fAnglePlayer) * g_fLengthPlayer;
+	pVtx[2].pos.x = g_player.pos.x + sinf(g_player.rot.z + -g_fAnglePlayer) * g_player.fLength;
 
-	pVtx[2].pos.y = g_player.pos.y + cosf(g_player.rot.z + -g_fAnglePlayer) * g_fLengthPlayer;
+	pVtx[2].pos.y = g_player.pos.y + cosf(g_player.rot.z + -g_fAnglePlayer) * g_player.fLength;
 
 	pVtx[2].pos.z = 0.0f;
 
-	pVtx[3].pos.x = g_player.pos.x + sinf(g_player.rot.z + g_fAnglePlayer) * g_fLengthPlayer;
+	pVtx[3].pos.x = g_player.pos.x + sinf(g_player.rot.z + g_fAnglePlayer) * g_player.fLength;
 
-	pVtx[3].pos.y = g_player.pos.y + cosf(g_player.rot.z + g_fAnglePlayer) * g_fLengthPlayer;
+	pVtx[3].pos.y = g_player.pos.y + cosf(g_player.rot.z + g_fAnglePlayer) * g_player.fLength;
 
 	pVtx[3].pos.z = 0.0f;
 

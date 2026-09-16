@@ -9,6 +9,14 @@
 
 #include "main.h"
 
+//マクロ定義
+
+#define MAX_SCORECOLUMN (10) //列数 
+
+#define MAX_SCORELINES (1) //行数
+
+#define NUM_SCOREPLACE (8) //スコアの桁数
+
 //スコアのテクスチャの列挙型定義
 
 typedef enum
@@ -20,6 +28,8 @@ typedef enum
 	SCORE_2, //金
 
 	SCORE_3, //虹色
+
+	SCORE_4, //青色
 
 	SCORE_MAX //最大
 

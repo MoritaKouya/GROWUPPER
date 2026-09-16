@@ -7,16 +7,7 @@
 #include "score.h"
 #include <stdio.h>
 #include <time.h>
-
-//マクロ定義
-
-#define NUM_PLACE (8) //スコアの桁数
-
-#define MAX_ANIM (10) //アニメーションの最大数
-
-#define MAX_COLUMN (10) //列数 
-
-#define MAX_LINES (1) //行数
+#include "score_deltascore.h"
 
 //グローバル変数
 
@@ -39,6 +30,8 @@ const char* g_aScoreTexture_Path[SCORE_MAX] =
 	"Data/TEXTURE/NUMBER/number002.png",
 
 	"Data/TEXTURE/NUMBER/number003.png",
+
+	"Data/TEXTURE/NUMBER/number004.png",
 }; //テクスチャの相対パスの構造体
 
 //========================
@@ -50,7 +43,7 @@ void InitScore(void)
 
 	int nCntPlace;
 
-	int aTexU[NUM_PLACE] = { 0 }; //各桁の数値を格納
+	int aTexU[NUM_SCOREPLACE] = { 0 }; //各桁の数値を格納
 
 	g_type = SCORE_0; //タイプを初期化
 
@@ -74,7 +67,7 @@ void InitScore(void)
 
 	//頂点バッファの生成
 
-	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * NUM_PLACE, //確保するバッファのサイズ
+	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * NUM_SCOREPLACE, //確保するバッファのサイズ
 													   //sizeof(VERTEX_2D)*必要な頂点数
 
 		D3DUSAGE_WRITEONLY,
@@ -93,7 +86,7 @@ void InitScore(void)
 
 	g_pVtxBuffScore->Lock(0, 0, (void**)&pVtx, 0);
 
-	for (nCntPlace = 0; nCntPlace < NUM_PLACE; nCntPlace++, pVtx += 4)
+	for (nCntPlace = 0; nCntPlace < NUM_SCOREPLACE; nCntPlace++, pVtx += 4)
 	{
 		//頂点座標の設定
 
@@ -118,6 +111,8 @@ void InitScore(void)
 		pVtx[3].pos.x = g_posScore.x + (nCntPlace * 50.0f) + sinf(D3DX_PI * 0.25) * 25.0f;
 
 		pVtx[3].pos.y = g_posScore.y + cosf(D3DX_PI * 0.25) * 50.0f;
+		
+		pVtx[3].pos.z = 0.0f;
 
 		//rhwの設定 1.0f固定
 
@@ -141,13 +136,13 @@ void InitScore(void)
 
 		//テクスチャ座標の設定
 
-		pVtx[0].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * (0 % MAX_COLUMN), (1.0f / MAX_LINES) * (0 / MAX_COLUMN));
+		pVtx[0].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * (0 % MAX_SCORECOLUMN), (1.0f / MAX_SCORELINES) * (0 / MAX_SCORECOLUMN));
 
-		pVtx[1].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * ((0 % MAX_COLUMN) + 1.0f), (1.0f / MAX_LINES) * (0 / MAX_COLUMN));
+		pVtx[1].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * ((0 % MAX_SCORECOLUMN) + 1.0f), (1.0f / MAX_SCORELINES) * (0 / MAX_SCORECOLUMN));
 
-		pVtx[2].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * (0 % MAX_COLUMN), (1.0f / MAX_LINES) * (0 / MAX_COLUMN) + (1.0f / MAX_LINES));
+		pVtx[2].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * (0 % MAX_SCORECOLUMN), (1.0f / MAX_SCORELINES) * (0 / MAX_SCORECOLUMN) + (1.0f / MAX_SCORELINES));
 
-		pVtx[3].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * ((0 % MAX_COLUMN) + 1.0f), (1.0f / MAX_LINES) * (0 / MAX_COLUMN) + (1.0f / MAX_LINES));
+		pVtx[3].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * ((0 % MAX_SCORECOLUMN) + 1.0f), (1.0f / MAX_SCORELINES) * (0 / MAX_SCORECOLUMN) + (1.0f / MAX_SCORELINES));
 	}
 
 	//頂点バッファをアンロックする
@@ -155,6 +150,10 @@ void InitScore(void)
 	g_pVtxBuffScore->Unlock();
 
 	srand((unsigned int)time(NULL));
+
+	//各オブジェクトの初期化処理
+
+	InitDeltaScore(); //スコアの増加量表示
 }
 
 //========================
@@ -182,6 +181,8 @@ void UninitScore(void)
 
 		g_pVtxBuffScore = NULL;
 	}
+
+	//各オブジェクトの終了処理
 }
 
 //========================
@@ -189,7 +190,9 @@ void UninitScore(void)
 //========================
 void UpdateScore(void)
 {
-	
+	//各オブジェクトの更新処理
+
+	UpdateDeltaScore(); //スコアの増加量表示
 }
 
 //========================
@@ -197,6 +200,10 @@ void UpdateScore(void)
 //========================
 void DrawScore(void)
 {
+	//各オブジェクトの描画処理
+
+	DrawDeltaScore(); //スコアの増加量表示
+
 	LPDIRECT3DDEVICE9 pDevice;
 
 	int nCntPlace;
@@ -217,7 +224,7 @@ void DrawScore(void)
 
 	pDevice->SetTexture(0, g_apTextureScore[g_type]);
 
-	for (nCntPlace = 0; nCntPlace < NUM_PLACE; nCntPlace++)
+	for (nCntPlace = 0; nCntPlace < NUM_SCOREPLACE; nCntPlace++)
 	{
 		//ポリゴンの描画
 
@@ -230,7 +237,7 @@ void DrawScore(void)
 //========================
 void SetScore()
 {
-	int aTexU[NUM_PLACE]; //各桁の数値を格納
+	int aTexU[NUM_SCOREPLACE]; //各桁の数値を格納
 
 	g_posScore = D3DXVECTOR3((SCREEN_WIDTH / 2) - 350.0f, (SCREEN_HEIGHT / 3), 0.0f);
 
@@ -256,7 +263,7 @@ void SetScore()
 
 	g_pVtxBuffScore->Lock(0, 0, (void**)&pVtx, 0);
 
-	for (int nCntPlace = 0; nCntPlace < NUM_PLACE; nCntPlace++, pVtx += 4)
+	for (int nCntPlace = 0; nCntPlace < NUM_SCOREPLACE; nCntPlace++, pVtx += 4)
 	{
 		//頂点座標の設定
 
@@ -284,13 +291,13 @@ void SetScore()
 
 		//テクスチャ座標の設定
 
-		pVtx[0].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * (aTexU[nCntPlace] % MAX_COLUMN), (1.0f / MAX_LINES) * (aTexU[nCntPlace] / MAX_COLUMN));
+		pVtx[0].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * (aTexU[nCntPlace] % MAX_SCORECOLUMN), (1.0f / MAX_SCORELINES) * (aTexU[nCntPlace] / MAX_SCORECOLUMN));
 
-		pVtx[1].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * ((aTexU[nCntPlace] % MAX_COLUMN) + 1.0f), (1.0f / MAX_LINES) * (aTexU[nCntPlace] / MAX_COLUMN));
+		pVtx[1].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * ((aTexU[nCntPlace] % MAX_SCORECOLUMN) + 1.0f), (1.0f / MAX_SCORELINES) * (aTexU[nCntPlace] / MAX_SCORECOLUMN));
 
-		pVtx[2].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * (aTexU[nCntPlace] % MAX_COLUMN), (1.0f / MAX_LINES) * (aTexU[nCntPlace] / MAX_COLUMN) + (1.0f / MAX_LINES));
+		pVtx[2].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * (aTexU[nCntPlace] % MAX_SCORECOLUMN), (1.0f / MAX_SCORELINES) * (aTexU[nCntPlace] / MAX_SCORECOLUMN) + (1.0f / MAX_SCORELINES));
 
-		pVtx[3].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * ((aTexU[nCntPlace] % MAX_COLUMN) + 1.0f), (1.0f / MAX_LINES) * (aTexU[nCntPlace] / MAX_COLUMN) + (1.0f / MAX_LINES));
+		pVtx[3].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * ((aTexU[nCntPlace] % MAX_SCORECOLUMN) + 1.0f), (1.0f / MAX_SCORELINES) * (aTexU[nCntPlace] / MAX_SCORECOLUMN) + (1.0f / MAX_SCORELINES));
 
 	}
 
@@ -306,9 +313,11 @@ void AddScore(int nValue)
 {
 	int nCntPlace;
 
-	int aTexU[NUM_PLACE]; //各桁の数値を格納
+	int aTexU[NUM_SCOREPLACE]; //各桁の数値を格納
 
-	g_nScore += nValue * 100 + rand()%10;
+	int nDeltaScore = nValue * 100 + rand() % 10; //スコアの増加量を格納
+
+	g_nScore += nDeltaScore;
 
 	//最大値を超えたとき
 
@@ -339,17 +348,17 @@ void AddScore(int nValue)
 
 	g_pVtxBuffScore->Lock(0, 0, (void**)&pVtx, 0);
 
-	for (nCntPlace = 0; nCntPlace < NUM_PLACE; nCntPlace++, pVtx += 4)
+	for (nCntPlace = 0; nCntPlace < NUM_SCOREPLACE; nCntPlace++, pVtx += 4)
 	{
 		//テクスチャ座標の設定
 
-		pVtx[0].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * (aTexU[nCntPlace] % MAX_COLUMN), (1.0f / MAX_LINES) * (aTexU[nCntPlace] / MAX_COLUMN));
+		pVtx[0].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * (aTexU[nCntPlace] % MAX_SCORECOLUMN), (1.0f / MAX_SCORELINES) * (aTexU[nCntPlace] / MAX_SCORECOLUMN));
 
-		pVtx[1].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * ((aTexU[nCntPlace] % MAX_COLUMN) + 1.0f), (1.0f / MAX_LINES) * (aTexU[nCntPlace] / MAX_COLUMN));
+		pVtx[1].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * ((aTexU[nCntPlace] % MAX_SCORECOLUMN) + 1.0f), (1.0f / MAX_SCORELINES) * (aTexU[nCntPlace] / MAX_SCORECOLUMN));
 
-		pVtx[2].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * (aTexU[nCntPlace] % MAX_COLUMN), (1.0f / MAX_LINES) * (aTexU[nCntPlace] / MAX_COLUMN) + (1.0f / MAX_LINES));
+		pVtx[2].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * (aTexU[nCntPlace] % MAX_SCORECOLUMN), (1.0f / MAX_SCORELINES) * (aTexU[nCntPlace] / MAX_SCORECOLUMN) + (1.0f / MAX_SCORELINES));
 
-		pVtx[3].tex = D3DXVECTOR2((1.0f / MAX_COLUMN) * ((aTexU[nCntPlace] % MAX_COLUMN) + 1.0f), (1.0f / MAX_LINES) * (aTexU[nCntPlace] / MAX_COLUMN) + (1.0f / MAX_LINES));
+		pVtx[3].tex = D3DXVECTOR2((1.0f / MAX_SCORECOLUMN) * ((aTexU[nCntPlace] % MAX_SCORECOLUMN) + 1.0f), (1.0f / MAX_SCORELINES) * (aTexU[nCntPlace] / MAX_SCORECOLUMN) + (1.0f / MAX_SCORELINES));
 
 	}
 	
@@ -375,6 +384,15 @@ void AddScore(int nValue)
 	{
 		g_type = SCORE_3;//金色
 	}
+
+	if (g_nScore >= 15000000) //スコアが10000000以上の場合
+	{
+		g_type = SCORE_4;//金色
+	}
+
+	//スコアの増加量表示
+
+	SetDeltaScore(nDeltaScore);
 	
 }
 //========================

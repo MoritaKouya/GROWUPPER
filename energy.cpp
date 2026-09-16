@@ -389,7 +389,7 @@ void CollisionPlayer(Energy* pEnergy)
 
 	//２つの円の半径の合計
 
-	float fTotalRadius = (ENERGY_HIT + PLAYER_DIAGONAL); //半径の合計の長さ
+	float fTotalRadius = (ENERGY_HIT + pPlayer->fLength); //半径の合計の長さ
 
 	if (fDistanceSquared <= fTotalRadius * fTotalRadius) //半径の合計の２乗より距離の２乗が小さい場合
 	{//エネルギーとプレイヤーが当たった

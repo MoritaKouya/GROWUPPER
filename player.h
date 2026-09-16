@@ -15,8 +15,6 @@
 
 #define REQUIRED_ENERGY (3) //必要エネルギー
 
-#define PLAYER_DIAGONAL (50) //プレイヤーの中心からの対角線の長さ
-
 #define MAX_HP (600)
 
 //プレイヤーの状態
@@ -60,6 +58,8 @@ typedef struct
 	int nBulletCounter; //球のカウント
 
 	int nCntEnergy; //エネルギーの個数
+
+	float fLength; //対角線の長さ
 
 	//ステータス
 

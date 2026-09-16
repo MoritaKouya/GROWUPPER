@@ -47,6 +47,8 @@ const char* g_aRankingScoreTexture_Path[SCORE_MAX] =
 	"Data/TEXTURE/NUMBER/number002.png",
 
 	"Data/TEXTURE/NUMBER/number003.png",
+
+	"Data/TEXTURE/NUMBER/number004.png",
 }; //テクスチャの相対パスの構造体
 
 //========================
@@ -136,6 +138,11 @@ void InitRankingScore(void)
 		if (g_nRankingScore[nCount] >= 10000000) //ランキングスコアが10000000以上の場合
 		{
 			g_type[nCount] = SCORE_3;//金色
+		}
+
+		if (g_nRankingScore[nCount] >= 15000000) //スコアが10000000以上の場合
+		{
+			g_type[nCount] = SCORE_4;//金色
 		}
 	}
 
