@@ -27,9 +27,11 @@ void UpdateGame(void);
 
 void DrawGame(void); 
 
-//敵が出てくるかどうかを判別する処理
+//敵のスポーン
 
-bool FlagEnemy(D3DXVECTOR3 posenemy);
+void SpawnEnemy(int nMaxEnemy); //敵を出す処理
+
+bool FlagEnemy(D3DXVECTOR3 posenemy); //敵が出てくるかどうかの判別処理
 
 //ポーズの切り替え処理
 

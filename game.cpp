@@ -322,23 +322,15 @@ void UpdateGame(void)
 
 				//敵を増やす
 
-				if (GetNumEnemy() < 5)
-				{
-					int nType = rand() % ENEMYTYPE_MAX; //ランダムで敵のタイプを決める
+				if ((60 * 90) <= GetTimer())
+				{ //時間が半分以上の場合
 
-					ENEMYTYPE type = (ENEMYTYPE)nType; //タイプを代入する
+						SpawnEnemy(5);			
+				}
+				else
+				{ //時間が半分以下の場合
 
-					float fX = (float)(rand() % 980 + 150 + 1); //縦
-
-					float fY = (float)(rand() % 420 + 150 + 1); //横
-
-					bool bFlagEnemy = FlagEnemy(D3DXVECTOR3(fX, fY, 0.0f));
-
-					if (bFlagEnemy == true)
-					{ //敵が出て来ていい場合
-
-						SetEnemy(D3DXVECTOR3(fX, fY, 0.0f), type);
-					}
+					SpawnEnemy(10);
 				}
 
 				if (GetTimer() == 0)//ゲーム終了処理
@@ -453,6 +445,31 @@ void DrawGame(void)
 
 		DrawStartCountDown();
 	
+	}
+}
+
+//=========================
+//敵を出す処理
+//=========================
+void SpawnEnemy(int nMaxEnemy)
+{
+	if (GetNumEnemy() < nMaxEnemy)
+	{
+		int nType = rand() % ENEMYTYPE_MAX; //ランダムで敵のタイプを決める
+
+		ENEMYTYPE type = (ENEMYTYPE)nType; //タイプを代入する
+
+		float fX = (float)(rand() % 980 + 150 + 1); //縦
+
+		float fY = (float)(rand() % 420 + 150 + 1); //横
+
+		bool bFlagEnemy = FlagEnemy(D3DXVECTOR3(fX, fY, 0.0f));
+
+		if (bFlagEnemy == true)
+		{ //敵が出て来ていい場合
+
+			SetEnemy(D3DXVECTOR3(fX, fY, 0.0f), type);
+		}
 	}
 }
 
