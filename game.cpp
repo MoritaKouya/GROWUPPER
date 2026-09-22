@@ -126,25 +126,7 @@ void InitGame(void)
 	
 	SetEnemy(D3DXVECTOR3(1000.0f,500.0f , 0.0f), ENEMYTYPE_1); //金UFOを確定で呼び出す
 
-	while(GetNumEnemy() < 5)
-	{
-		int nType = rand() % ENEMYTYPE_4; //ランダムで敵のタイプを決める（ボムUFO以外の）
-
-		ENEMYTYPE type = (ENEMYTYPE)nType; //タイプを代入する
-
-		float fX = (float)(rand() % 980 + 150 + 1); //縦
-
-		float fY = (float)(rand() % 420 + 150 + 1); //横
-
-		bool bFlagEnemy = FlagEnemy(D3DXVECTOR3(fX, fY, 0.0f));
-
-		if (bFlagEnemy == true)
-		{ //敵が出て来ていい場合
-
-			SetEnemy(D3DXVECTOR3(fX, fY, 0.0f), type);
-		}
-	}
-
+	SpawnEnemy(5);
 }
 
 //=========================
@@ -325,7 +307,7 @@ void UpdateGame(void)
 				if ((60 * 90) <= GetTimer())
 				{ //時間が半分以上の場合
 
-						SpawnEnemy(5);			
+					SpawnEnemy(5);
 				}
 				else
 				{ //時間が半分以下の場合

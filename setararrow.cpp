@@ -64,7 +64,7 @@ void InitSetArrow(void)
 
 	for (nCount = 0; nCount < NUM_SETARROW; nCount++)
 	{
-		g_SetArrow[nCount].move = D3DXVECTOR3(0.0f, 5.0f, 0.0f); //移動量
+		g_SetArrow[nCount].move = D3DXVECTOR3(0.0f, 0.5f, 0.0f); //移動量
 
 		g_SetArrow[nCount].State = TUTORIALARROWSTATE_NORMAL; //状態
 
@@ -220,7 +220,13 @@ void UninitSetArrow(void)
 //=========================
 void UpdateSetArrow(void)
 {
-	for (int nCnt = 0; nCnt < NUM_SETARROW; nCnt++)
+	VERTEX_2D* pVtx;
+
+	//頂点バッファをロックし、頂点データへのポインタを取得
+
+	g_pVtxBuffSetArrow->Lock(0, 0, (void**)&pVtx, 0);
+
+	for (int nCnt = 0; nCnt < NUM_SETARROW; nCnt++, pVtx += 4)
 	{
 		g_SetArrow[nCnt].nStateCounter--;
 
@@ -228,7 +234,43 @@ void UpdateSetArrow(void)
 		{
 			g_SetArrow[nCnt].State = TUTORIALARROWSTATE_NORMAL;
 		}
+
+		g_SetArrow[nCnt].pos.y += g_SetArrow[0].move.y;
+
+		if (g_SetArrow[nCnt].pos.y == SCREEN_HEIGHT / 2 - 15
+			|| g_SetArrow[nCnt].pos.y == SCREEN_HEIGHT / 2 + 15)
+		{
+			g_SetArrow[nCnt].move.y *= -1;
+		}
+
+		//頂点座標の設定
+
+		pVtx[0].pos.x = g_SetArrow[nCnt].pos.x + sinf(-D3DX_PI * 0.75f) * g_SetArrow[nCnt].fRadius;
+
+		pVtx[0].pos.y = g_SetArrow[nCnt].pos.y + cosf(-D3DX_PI * 0.75f) * g_SetArrow[nCnt].fRadius;
+
+		pVtx[0].pos.z = 0.0f;
+
+		pVtx[1].pos.x = g_SetArrow[nCnt].pos.x + sinf(D3DX_PI * 0.75f) * g_SetArrow[nCnt].fRadius;
+
+		pVtx[1].pos.y = g_SetArrow[nCnt].pos.y + cosf(D3DX_PI * 0.75f) * g_SetArrow[nCnt].fRadius;
+
+		pVtx[1].pos.z = 0.0f;
+
+		pVtx[2].pos.x = g_SetArrow[nCnt].pos.x + sinf(-D3DX_PI * 0.25) * g_SetArrow[nCnt].fRadius;
+
+		pVtx[2].pos.y = g_SetArrow[nCnt].pos.y + cosf(-D3DX_PI * 0.25) * g_SetArrow[nCnt].fRadius;
+
+		pVtx[2].pos.z = 0.0f;
+
+		pVtx[3].pos.x = g_SetArrow[nCnt].pos.x + sinf(D3DX_PI * 0.25) * g_SetArrow[nCnt].fRadius;
+
+		pVtx[3].pos.y = g_SetArrow[nCnt].pos.y + cosf(D3DX_PI * 0.25) * g_SetArrow[nCnt].fRadius;
+
+		pVtx[3].pos.z = 0.0f;
 	}
+
+	g_pVtxBuffSetArrow->Unlock();
 }
 
 //=========================
