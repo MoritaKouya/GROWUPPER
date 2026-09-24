@@ -36,9 +36,9 @@ int g_nBlinkingCounter[NUM_RANKINGPLAYER]; //点滅のカウント
 
 bool g_bBlinkingScore[NUM_RANKINGPLAYER]; //プレイヤーのランキングスコアが点滅するかどうか（trueならするfalseならしない）
 
-SCORETEXTURE g_type[SCORE_MAX]; //ランキングスコアのタイプを代入する変数
+SCORERANK g_type[SCORE_MAX]; //ランキングスコアのタイプを代入する変数
 
-const char* g_aRankingScoreTexture_Path[SCORE_MAX] =
+const char* g_aRankingSCORERANK_Path[SCORE_MAX] =
 {
 	"Data/TEXTURE/NUMBER/number000.png",
 
@@ -73,7 +73,7 @@ void InitRankingScore(void)
 	{
 		D3DXCreateTextureFromFile(pDevice,
 
-			g_aRankingScoreTexture_Path[nCount], //テクスチャのファイル名
+			g_aRankingSCORERANK_Path[nCount], //テクスチャのファイル名
 
 			&g_apTextureRankingScore[nCount]);
 	}
@@ -123,27 +123,32 @@ void InitRankingScore(void)
 
 		//銀色にする
 
-		if (g_nRankingScore[nCount] >= 2500000) //ランキングスコアが5000000以上の場合
+		if (g_nRankingScore[nCount] >= SCORERANK_1) //スコアが5000000以上の場合
 		{
 			g_type[nCount] = SCORE_1; //銀色
 		}
 
 		//金色にする
 
-		if (g_nRankingScore[nCount] >= 5000000) //ランキングスコアが5000000以上の場合
+		if (g_nRankingScore[nCount] >= SCORERANK_2) //スコアが5000000以上の場合
 		{
-			g_type[nCount] = SCORE_2; //銀色
+			g_type[nCount] = SCORE_2; //金色
 		}
 
-		if (g_nRankingScore[nCount] >= 10000000) //ランキングスコアが10000000以上の場合
+		//虹色にする
+
+		if (g_nRankingScore[nCount] >= SCORERANK_3) //スコアが10000000以上の場合
 		{
-			g_type[nCount] = SCORE_3;//金色
+			g_type[nCount] = SCORE_3;//虹色
 		}
 
-		if (g_nRankingScore[nCount] >= 15000000) //スコアが10000000以上の場合
+		//青色にする
+
+		if (g_nRankingScore[nCount] >= SCORERANK_4) //スコアが10000000以上の場合
 		{
-			g_type[nCount] = SCORE_4;//金色
+			g_type[nCount] = SCORE_4;//青色
 		}
+		
 	}
 
 	//点滅する文字の判定

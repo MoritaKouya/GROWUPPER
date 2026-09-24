@@ -552,6 +552,37 @@ void ShootBallet(void)
 
 				,BULLETTYPE_PLAYER);
 
+			if (15 <=g_player.nLevel)
+			{
+				SetBullet(D3DXVECTOR3(g_player.pos.x + sinf(g_player.rot.z + (D3DX_PI * 0.5f)) * 50.0f,
+
+					g_player.pos.y + cosf(g_player.rot.z + (D3DX_PI * 0.5f)) * 50.0f,
+
+					0.0f)
+
+					, D3DXVECTOR3(sinf(g_player.rot.z + (D3DX_PI * 0.55f)) * 20.0f, cosf(g_player.rot.z + (D3DX_PI * 0.55f)) * 20.0f, 0.0f),
+
+					100
+
+					, g_player.nAttack
+
+					, BULLETTYPE_PLAYER);
+
+				SetBullet(D3DXVECTOR3(g_player.pos.x + sinf(g_player.rot.z + (D3DX_PI * 0.5f)) * 50.0f,
+
+					g_player.pos.y + cosf(g_player.rot.z + (D3DX_PI * 0.5f)) * 50.0f,
+
+					0.0f)
+
+					, D3DXVECTOR3(sinf(g_player.rot.z + (D3DX_PI * 0.45f)) * 20.0f, cosf(g_player.rot.z + (D3DX_PI * 0.45f)) * 20.0f, 0.0f),
+
+					100
+
+					, g_player.nAttack
+
+					, BULLETTYPE_PLAYER);
+			}
+
 			g_player.nBulletCounter = 30 / g_player.nRate;
 		}
 	}

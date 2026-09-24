@@ -17,7 +17,17 @@
 
 #define NUM_SCOREPLACE (8) //スコアの桁数
 
-//スコアのテクスチャの列挙型定義
+#define SCORERANK_0 (0) //Cランク
+
+#define SCORERANK_1 (2500000) //Bランク
+
+#define SCORERANK_2 (10000000) //Aランク
+
+#define SCORERANK_3 (30000000) //EXランク
+
+#define SCORERANK_4 (55000000) //EX+ランク
+
+//スコアランクの種類定義
 
 typedef enum
 {
@@ -33,7 +43,7 @@ typedef enum
 
 	SCORE_MAX //最大
 
-}SCORETEXTURE;
+}SCORERANK;
 
 //プロトタイプ
 
@@ -65,6 +75,6 @@ void AddScore(int nValue);
 
 int GetScore(void); 
 
-SCORETEXTURE GetScoreRank(void); //スコアランクの獲得処理
+SCORERANK GetScoreRank(void); //スコアランクの獲得処理
 
 #endif

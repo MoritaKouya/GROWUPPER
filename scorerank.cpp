@@ -15,40 +15,15 @@
 
 #define SCORERANK_SIZE_Y (225) //縦の半径
 
-#define SCORERANK_EXPLUS (15000000) //EXの範囲
-
-#define SCORERANK_EX (10000000) //EXの範囲
-
-#define SCORERANK_A (5000000) //Aの範囲
-
-#define SCORERANK_B (2500000) //Bの範囲
-
-//スコアランクのテクスチャの列挙型定義
-
-typedef enum
-{
-	SCORERANK_0 = 0, //C
-
-	SCORERANK_1, //B
-
-	SCORERANK_2, //A
-
-	SCORERANK_3, //EX
-
-	SCORERANK_4, //EX+
-
-	SCORERANK_MAX //最大数
-}SCORERANK_TEXTURE;
-
 D3DXVECTOR3 g_pos; //位置
 
-SCORERANK_TEXTURE g_ScoreRank; //ランクを代入
+SCORERANK g_ScoreRank; //ランクを代入
 
-LPDIRECT3DTEXTURE9 g_pTextureScoreRank[SCORERANK_MAX] = {}; //テクスチャへのポインタ
+LPDIRECT3DTEXTURE9 g_pTextureScoreRank[SCORE_MAX] = {}; //テクスチャへのポインタ
 
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffScoreRank = NULL; //頂点バッファへのポインタ
 
-const char* g_aScoreRankTexture_Path[SCORERANK_MAX] =
+const char* g_aScoreRankTexture_Path[SCORE_MAX] =
 {
 	"Data/TEXTURE/SCORERANK/scorerank000.png",
 
@@ -80,7 +55,7 @@ void InitScoreRank(void)
 
 	//テクスチャの読み込み
 
-	for (nCount = 0; nCount < SCORERANK_MAX; nCount++)
+	for (nCount = 0; nCount < SCORE_MAX; nCount++)
 	{
 		D3DXCreateTextureFromFile(pDevice,
 
@@ -93,25 +68,25 @@ void InitScoreRank(void)
 
 	nScore = GetScore();
 	
-	if(SCORERANK_EXPLUS <= nScore)
+	if(SCORERANK_4 <= nScore)
 	{
-		g_ScoreRank = SCORERANK_4;
+		g_ScoreRank = SCORE_4;
 	}
-	else if (SCORERANK_EX <= nScore)
+	else if (SCORERANK_3 <= nScore)
 	{
-		g_ScoreRank = SCORERANK_3;
+		g_ScoreRank = SCORE_3;
 	}
-	else if (SCORERANK_A <= nScore)
+	else if (SCORERANK_2 <= nScore)
 	{
-		g_ScoreRank = SCORERANK_2;
+		g_ScoreRank = SCORE_2;
 	}
-	else if (SCORERANK_B <= nScore)
+	else if (SCORERANK_1 <= nScore)
 	{
-		g_ScoreRank = SCORERANK_1;
+		g_ScoreRank = SCORE_1;
 	}
 	else
 	{
-		g_ScoreRank = SCORERANK_0;
+		g_ScoreRank = SCORE_0;
 	}
 	
 	//頂点バッファの生成
@@ -203,7 +178,7 @@ void InitScoreRank(void)
 void UninitScoreRank(void)
 {
 	//テクスチャの破棄
-	for (int nCnt = 0; nCnt < SCORERANK_MAX; nCnt++)
+	for (int nCnt = 0; nCnt < SCORE_MAX; nCnt++)
 	{
 		if (g_pTextureScoreRank[nCnt] != NULL)
 		{
