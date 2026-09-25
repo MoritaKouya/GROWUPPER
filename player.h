@@ -13,9 +13,11 @@
 
 //マクロ定義
 
+#define PLAYER_SIZE (75) //プレイヤーのサイズ
+
 #define REQUIRED_ENERGY (3) //必要エネルギー
 
-#define MAX_HP (600)
+#define MAX_HP (3)
 
 //プレイヤーの状態
 
@@ -59,8 +61,6 @@ typedef struct
 
 	int nCntEnergy; //エネルギーの個数
 
-	float fLength; //対角線の長さ
-
 	//ステータス
 
 	int nLevel; //レベル
@@ -68,8 +68,6 @@ typedef struct
 	int nLife; //体力
 
 	int nAttack; //攻撃力
-
-	int nGguard; //防御力
 
 	int nRate; //連射力
 

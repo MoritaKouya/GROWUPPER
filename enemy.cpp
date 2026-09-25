@@ -828,7 +828,7 @@ void CollisionPlayer(Enemy* pEnemy)
 
 	//２つの円の半径の合計
 
-	float fTotalRadius = (ENEMY_DIAGONAL + pPlayer->fLength); //半径の合計の長さ
+	float fTotalRadius = (ENEMY_DIAGONAL + PLAYER_SIZE); //半径の合計の長さ
 
 	if (fDistanceSquared <= fTotalRadius * fTotalRadius) //半径の合計の２乗より距離の２乗が小さい場合
 	{//敵とプレイヤーが当たった

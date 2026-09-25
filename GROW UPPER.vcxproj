@@ -160,6 +160,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="hp.cpp" />
     <ClCompile Include="hpdelay.cpp" />
+    <ClCompile Include="player_barrier.cpp" />
     <ClCompile Include="score_deltascore.cpp" />
     <ClCompile Include="startcountdown.cpp" />
     <ClCompile Include="startcountdownber.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="hp.h" />
     <ClInclude Include="hpdelay.h" />
+    <ClInclude Include="player_barrier.h" />
     <ClInclude Include="score_deltascore.h" />
     <ClInclude Include="startcountdownber.h" />
     <ClInclude Include="startcountdowntext.h" />

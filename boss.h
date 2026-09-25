@@ -13,6 +13,8 @@
 
 #define BOSS_DIAGONAL (150) //“G‚Ì’†S‚©‚ç‚Ì‘ÎŠpü‚Ì’·‚³
 
+#define BOSS_COLLISION (120) //ƒ{ƒX‚Ì“–‚½‚è”»’è
+
 //“G‚Ìó‘Ô
 
 typedef enum

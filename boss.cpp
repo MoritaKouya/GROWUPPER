@@ -166,7 +166,6 @@ void InitBoss(void)
 //===================
 void UninitBoss(void)
 {
-
 	//テクスチャ（４枚分）の破棄
 
 	if (g_pTextureBoss != NULL)
@@ -545,7 +544,6 @@ float CalcAngleCenter(void)
 //===================
 void HitBoss(int nDamage)
 {
-
 	g_Boss.state = BossSTATE_DAMAGE; //ダメージを与える
 
 	g_Boss.nCounterState = 5;
@@ -595,7 +593,7 @@ void CollisionPlayer(BOSS* Boss)
 
 	//２つの円の半径の合計
 
-	float fTotalRadius = (BOSS_DIAGONAL + pPlayer->fLength); //半径の合計の長さ
+	float fTotalRadius = (BOSS_COLLISION + PLAYER_SIZE); //半径の合計の長さ
 
 	if (fDistanceSquared <= fTotalRadius * fTotalRadius) //半径の合計の２乗より距離の２乗が小さい場合
 	{//ボスとプレイヤーが当たった

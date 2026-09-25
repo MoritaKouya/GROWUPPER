@@ -116,8 +116,6 @@ void InitPlayer(void)
 
 	g_player.nBulletCounter = 0; //球のカウンター
 
-	g_player.fLength = sqrtf(100 * 100 + 100 * 100) * 0.5f; //対角線の長さを算出する
-
 	g_player.nCntEnergy = 0; //エネルギー
 
 	g_player.nLevel = 1; //レベル
@@ -125,8 +123,6 @@ void InitPlayer(void)
 	g_player.nLife = MAX_HP; //体力
 
 	g_player.nAttack = 1; //攻撃力
-
-	g_player.nGguard = 1; //防御力
 
 	g_player.nRate = 1; //連射力
 
@@ -165,27 +161,27 @@ void InitPlayer(void)
 
 	//頂点座標の設定
 
-	pVtx[0].pos.x = g_player.pos.x + sinf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
+	pVtx[0].pos.x = g_player.pos.x + sinf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * PLAYER_SIZE;
 
-	pVtx[0].pos.y = g_player.pos.y + cosf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
+	pVtx[0].pos.y = g_player.pos.y + cosf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * PLAYER_SIZE;
 
 	pVtx[0].pos.z = 0.0f;
 
-	pVtx[1].pos.x = g_player.pos.x + sinf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
+	pVtx[1].pos.x = g_player.pos.x + sinf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * PLAYER_SIZE;
 
-	pVtx[1].pos.y = g_player.pos.y + cosf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
+	pVtx[1].pos.y = g_player.pos.y + cosf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * PLAYER_SIZE;
 
 	pVtx[1].pos.z = 0.0f;
 
-	pVtx[2].pos.x = g_player.pos.x + sinf(g_player.rot.z + -g_fAnglePlayer) * g_player.fLength;
+	pVtx[2].pos.x = g_player.pos.x + sinf(g_player.rot.z + -g_fAnglePlayer) * PLAYER_SIZE;
 
-	pVtx[2].pos.y = g_player.pos.y + cosf(g_player.rot.z + -g_fAnglePlayer) * g_player.fLength;
+	pVtx[2].pos.y = g_player.pos.y + cosf(g_player.rot.z + -g_fAnglePlayer) * PLAYER_SIZE;
 
 	pVtx[2].pos.z = 0.0f;
 
-	pVtx[3].pos.x = g_player.pos.x + sinf(g_player.rot.z + g_fAnglePlayer) * g_player.fLength;
+	pVtx[3].pos.x = g_player.pos.x + sinf(g_player.rot.z + g_fAnglePlayer) * PLAYER_SIZE;
 
-	pVtx[3].pos.y = g_player.pos.y + cosf(g_player.rot.z + g_fAnglePlayer) * g_player.fLength;
+	pVtx[3].pos.y = g_player.pos.y + cosf(g_player.rot.z + g_fAnglePlayer) * PLAYER_SIZE;
 
 	pVtx[3].pos.z = 0.0f;
 
@@ -271,7 +267,7 @@ void UpdatePlayer(void)
 	
 	//プレイヤーのエフェクト
 
-	SetPlayerEffect(g_player.pos, g_player.EffectCol,g_player.rot, 100, 120);
+	SetPlayerEffect(g_player.pos, g_player.EffectCol,g_player.rot, PLAYER_SIZE + 10, 120);
 }
 //=========================
 // プレイヤーの移動処理
@@ -373,22 +369,22 @@ void MovePlayer(void)
 
 	//壁に当たった時
 
-	if (g_player.pos.x - g_player.fLength < 0) //一番左に当たった場合
+	if (g_player.pos.x - PLAYER_SIZE < 0) //一番左に当たった場合
 	{
-		g_player.pos.x = g_player.fLength; //g_player.posを一番左にする
+		g_player.pos.x = PLAYER_SIZE; //g_player.posを一番左にする
 	}
-	else if (SCREEN_WIDTH < g_player.pos.x + g_player.fLength) //一番右に当たった場合
+	else if (SCREEN_WIDTH < g_player.pos.x + PLAYER_SIZE) //一番右に当たった場合
 	{
-		g_player.pos.x = SCREEN_WIDTH - g_player.fLength; //g_player.posを一番右にする
+		g_player.pos.x = SCREEN_WIDTH - PLAYER_SIZE; //g_player.posを一番右にする
 	}
 
-	if (g_player.pos.y - g_player.fLength < 0) //一番上にあたった場合
+	if (g_player.pos.y - PLAYER_SIZE < 0) //一番上にあたった場合
 	{
-		g_player.pos.y = g_player.fLength; //g_player.posを一番上にする
+		g_player.pos.y = PLAYER_SIZE; //g_player.posを一番上にする
 	}
-	else if (SCREEN_HEIGHT < g_player.pos.y + g_player.fLength) //一番下にあたった場合
+	else if (SCREEN_HEIGHT < g_player.pos.y + PLAYER_SIZE) //一番下にあたった場合
 	{
-		g_player.pos.y = SCREEN_HEIGHT - g_player.fLength; //g_player.posを一番下にする
+		g_player.pos.y = SCREEN_HEIGHT - PLAYER_SIZE; //g_player.posを一番下にする
 	}
 
 	//移動量の更新
@@ -403,27 +399,27 @@ void MovePlayer(void)
 
 	g_pVtxBuffPlayer->Lock(0, 0, (void**)&pVtx, 0);
 
-	pVtx[0].pos.x = g_player.pos.x + sinf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
+	pVtx[0].pos.x = g_player.pos.x + sinf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * PLAYER_SIZE;
 
-	pVtx[0].pos.y = g_player.pos.y + cosf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
+	pVtx[0].pos.y = g_player.pos.y + cosf(g_player.rot.z + (g_fAnglePlayer + D3DX_PI)) * PLAYER_SIZE;
 
 	pVtx[0].pos.z = 0.0f;
 
-	pVtx[1].pos.x = g_player.pos.x + sinf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
+	pVtx[1].pos.x = g_player.pos.x + sinf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * PLAYER_SIZE;
 
-	pVtx[1].pos.y = g_player.pos.y + cosf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * g_player.fLength;
+	pVtx[1].pos.y = g_player.pos.y + cosf(g_player.rot.z + (-g_fAnglePlayer + D3DX_PI)) * PLAYER_SIZE;
 
 	pVtx[1].pos.z = 0.0f;
 
-	pVtx[2].pos.x = g_player.pos.x + sinf(g_player.rot.z + -g_fAnglePlayer) * g_player.fLength;
+	pVtx[2].pos.x = g_player.pos.x + sinf(g_player.rot.z + -g_fAnglePlayer) * PLAYER_SIZE;
 
-	pVtx[2].pos.y = g_player.pos.y + cosf(g_player.rot.z + -g_fAnglePlayer) * g_player.fLength;
+	pVtx[2].pos.y = g_player.pos.y + cosf(g_player.rot.z + -g_fAnglePlayer) * PLAYER_SIZE;
 
 	pVtx[2].pos.z = 0.0f;
 
-	pVtx[3].pos.x = g_player.pos.x + sinf(g_player.rot.z + g_fAnglePlayer) * g_player.fLength;
+	pVtx[3].pos.x = g_player.pos.x + sinf(g_player.rot.z + g_fAnglePlayer) * PLAYER_SIZE;
 
-	pVtx[3].pos.y = g_player.pos.y + cosf(g_player.rot.z + g_fAnglePlayer) * g_player.fLength;
+	pVtx[3].pos.y = g_player.pos.y + cosf(g_player.rot.z + g_fAnglePlayer) * PLAYER_SIZE;
 
 	pVtx[3].pos.z = 0.0f;
 
@@ -649,7 +645,7 @@ void HitPlayer(HIT hit, int amount)
 
 			//プレイヤーのライフを減らす
 
-			g_player.nLife -= (amount / g_player.nGguard);
+			g_player.nLife--;
 
 			//HPバーを減らす
 
@@ -710,13 +706,19 @@ void HitPlayer(HIT hit, int amount)
 
 			g_player.nAttack += g_player.nLevel; //攻撃力
 
-			g_player.nGguard += 1; //防御力
-
 			if (g_player.nLevel % 5 == 0)
 			{ //レベルが５の倍数分上がったら
 
 				g_player.nRate += 1; //連射力
 			}
+
+			//プレイヤーのライフを増やす
+
+			g_player.nLife += 1;
+
+			//HPバーを増やす
+
+			ModifyHpBer(g_player.nLife);
 		}
 
 		//エネルギーバーの加算処理

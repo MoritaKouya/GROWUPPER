@@ -6,6 +6,7 @@
 //=============================
 #include "game.h"
 #include "player.h"
+#include "player_barrier.h"
 #include "bg.h"
 #include "bullet.h"
 #include "explosion.h"
@@ -57,6 +58,8 @@ void InitGame(void)
 	InitPlayer();
 
 	InitPlayerEffect(); //プレイヤーエフェクト処理
+
+	InitPlayerBarrier(); //プレイヤーのバリアの処理
 
 	InitHp(); //hpの初期化
 
@@ -144,6 +147,8 @@ void UninitGame(void)
 	UninitPlayer();
 
 	UninitPlayerEffect(); //プレイヤーエフェクトの終了処理
+
+	UninitPlayerBarrier(); //プレイヤーのバリアの処理
 
 	UninitHp(); //hpの終了処理
 
@@ -257,6 +262,8 @@ void UpdateGame(void)
 				UpdatePlayer();
 
 				UpdatePlayerEffect(); //プレイヤーエフェクトの更新処理
+
+				UpdatePlayerBarrier(); //プレイヤーのバリアの処理
 
 				UpdateHp(); //hpの更新処理
 
@@ -379,9 +386,11 @@ void DrawGame(void)
 
 	//プレイヤーの描画処理
 
-	DrawPlayerEffect();
+	DrawPlayerEffect(); //プレイヤーのエフェクト処理
 
 	DrawPlayer();
+
+	DrawPlayerBarrier(); //プレイヤーのバリアの処理
 
 	//UI
 
@@ -426,7 +435,6 @@ void DrawGame(void)
 		 //スタートカウントダウン
 
 		DrawStartCountDown();
-	
 	}
 }
 
@@ -441,9 +449,9 @@ void SpawnEnemy(int nMaxEnemy)
 
 		ENEMYTYPE type = (ENEMYTYPE)nType; //タイプを代入する
 
-		float fX = (float)(rand() % 980 + 150 + 1); //縦
+		float fX = (float)(rand() % 880 + 200); //縦
 
-		float fY = (float)(rand() % 420 + 150 + 1); //横
+		float fY = (float)(rand() % 320 + 200); //横
 
 		bool bFlagEnemy = FlagEnemy(D3DXVECTOR3(fX, fY, 0.0f));
 

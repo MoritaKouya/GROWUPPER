@@ -113,15 +113,15 @@ void InitBullet(void)
 
 		pVtx[1].pos.z = 0.0f;
 
-		pVtx[2].pos.x = g_aBullet[nCntBullet].pos.x + sinf(-D3DX_PI * 0.25) * 10;
+		pVtx[2].pos.x = g_aBullet[nCntBullet].pos.x + sinf(-D3DX_PI * 0.25f) * 10;
 
-		pVtx[2].pos.y = g_aBullet[nCntBullet].pos.y + cosf(-D3DX_PI * 0.25) * 10;
+		pVtx[2].pos.y = g_aBullet[nCntBullet].pos.y + cosf(-D3DX_PI * 0.25f) * 10;
 
 		pVtx[2].pos.z = 0.0f;
 
-		pVtx[3].pos.x = g_aBullet[nCntBullet].pos.x + sinf(D3DX_PI * 0.25) * 10;
+		pVtx[3].pos.x = g_aBullet[nCntBullet].pos.x + sinf(D3DX_PI * 0.25f) * 10;
 
-		pVtx[3].pos.y = g_aBullet[nCntBullet].pos.y + cosf(D3DX_PI * 0.25) * 10;
+		pVtx[3].pos.y = g_aBullet[nCntBullet].pos.y + cosf(D3DX_PI * 0.25f) * 10;
 
 		pVtx[3].pos.z = 0.0f;
 
@@ -484,7 +484,7 @@ void CollisionBoss(Bullet* pBullet)
 
 	//２つの円の半径の合計
 
-	float fTotalRadius = (BOSS_DIAGONAL + BULLET_SIZE); //半径の合計の長さ
+	float fTotalRadius = (BOSS_COLLISION + BULLET_SIZE); //半径の合計の長さ
 
 	if (fDistanceSquared <= fTotalRadius * fTotalRadius) //半径の合計の２乗より距離の２乗が小さい場合
 	{//敵とプレイヤーが当たった
@@ -506,7 +506,7 @@ void CollisionPlayer(Bullet* pBullet)
 {
 	//プレイヤーの取得
 
-	Player* pPlayer = GetPlayer(); //敵の情報が代入される
+	Player* pPlayer = GetPlayer(); //プレイヤーの情報が代入される
 
 	//中心座標の距離（ｘ、ｙ）
 
@@ -520,12 +520,12 @@ void CollisionPlayer(Bullet* pBullet)
 
 	//２つの円の半径の合計
 
-	float fTotalRadius = (pPlayer->fLength + BULLET_SIZE); //半径の合計の長さ
+	float fTotalRadius = (PLAYER_SIZE + BULLET_SIZE); //半径の合計の長さ
 
 	if (fDistanceSquared <= fTotalRadius * fTotalRadius) //半径の合計の２乗より距離の２乗が小さい場合
 	{//敵とプレイヤーが当たった
 
-		HitPlayer(HIT_ENEMY, pBullet->nDamage); //敵のヒット処理
+		HitPlayer(HIT_ENEMY, pBullet->nDamage); //プレイヤーのヒット処理
 
 		pBullet->bUse = false; //球を使用していない状態にする
 	}
