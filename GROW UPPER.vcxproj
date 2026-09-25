@@ -160,6 +160,10 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="hp.cpp" />
     <ClCompile Include="hpdelay.cpp" />
+    <ClCompile Include="life.cpp" />
+    <ClCompile Include="lifeheart.cpp" />
+    <ClCompile Include="life_count.cpp" />
+    <ClCompile Include="life_multiplymark.cpp" />
     <ClCompile Include="player_barrier.cpp" />
     <ClCompile Include="score_deltascore.cpp" />
     <ClCompile Include="startcountdown.cpp" />
@@ -214,6 +218,10 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="hp.h" />
     <ClInclude Include="hpdelay.h" />
+    <ClInclude Include="life.h" />
+    <ClInclude Include="lifeheart.h" />
+    <ClInclude Include="life_count.h" />
+    <ClInclude Include="life_multiplymark.h" />
     <ClInclude Include="player_barrier.h" />
     <ClInclude Include="score_deltascore.h" />
     <ClInclude Include="startcountdownber.h" />

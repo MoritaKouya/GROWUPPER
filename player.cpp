@@ -16,7 +16,9 @@
 
 #include "fade.h"
 
-#include "hpber.h"
+//#include "hpber.h"
+
+#include "life_count.h"
 
 #include "playereffect.h"
 
@@ -649,7 +651,7 @@ void HitPlayer(HIT hit, int amount)
 
 			//HPバーを減らす
 
-			ModifyHpBer(g_player.nLife);
+		/*	ModifyHpBer(g_player.nLife);*/
 
 			if (g_player.nLife <= 0) //プレイヤーの体力がなくなった
 			{
@@ -712,13 +714,19 @@ void HitPlayer(HIT hit, int amount)
 				g_player.nRate += 1; //連射力
 			}
 
-			//プレイヤーのライフを増やす
+			//ライフを増やす処理
 
-			g_player.nLife += 1;
+			if (g_player.nLife < 9)
+			{ //ライフが9より低い場合
+
+				//プレイヤーのライフを増やす
+
+				g_player.nLife += 1;
+			}
 
 			//HPバーを増やす
 
-			ModifyHpBer(g_player.nLife);
+			/*ModifyHpBer(g_player.nLife);*/
 		}
 
 		//エネルギーバーの加算処理
@@ -727,4 +735,6 @@ void HitPlayer(HIT hit, int amount)
 
 		break;
 	}
+
+	ChangeLifeCount(g_player.nLife); //ライフカウント
 }

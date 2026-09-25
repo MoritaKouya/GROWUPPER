@@ -29,8 +29,9 @@
 #include "pause.h"
 #include "damagescreen.h"
 #include "startcountdown.h"
-#include "hp.h"
+//#include "hp.h"
 #include "score_deltascore.h"
+#include "life.h"
 
 //マクロ定義
 
@@ -61,7 +62,11 @@ void InitGame(void)
 
 	InitPlayerBarrier(); //プレイヤーのバリアの処理
 
-	InitHp(); //hpの初期化
+	//ライフの描画処理
+
+	InitLife();
+
+	//InitHp(); //hpの初期化
 
 	//レベルの初期化
 
@@ -150,7 +155,11 @@ void UninitGame(void)
 
 	UninitPlayerBarrier(); //プレイヤーのバリアの処理
 
-	UninitHp(); //hpの終了処理
+	//ライフの描画処理
+
+	UninitLife();
+
+	//UninitHp(); //hpの終了処理
 
 	//レベルの終了処理
 
@@ -265,7 +274,11 @@ void UpdateGame(void)
 
 				UpdatePlayerBarrier(); //プレイヤーのバリアの処理
 
-				UpdateHp(); //hpの更新処理
+				//ライフの描画処理
+
+				UpdateLife();
+
+				//UpdateHp(); //hpの更新処理
 
 				//レベルの更新
 
@@ -410,11 +423,15 @@ void DrawGame(void)
 
 	//hpバーの描画処理
 
-	DrawHp(); //hpの描画処理
+	//DrawHp(); //hpの描画処理
 
 	//名前の表示の描画処理
 
 	DrawOutputName();
+
+	//ライフの描画処理
+
+	DrawLife();
 
 	//ダメージスクリーン
 
