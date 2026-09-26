@@ -17,9 +17,9 @@
 
 #define MAX_LINES (1) //行数
 
-#define LENEL_SIZE_X (35) //レベルの横の半径
+#define LENEL_SIZE_X (25) //レベルの横の半径
 
-#define LENEL_SIZE_Y (70) //レベルの縦の半径
+#define LENEL_SIZE_Y (50) //レベルの縦の半径
 
 #define LENELTEXT_SIZE_X (50) //横の半径
 
@@ -60,7 +60,7 @@ void InitLevel(void)
 
 		&g_pTextureLevel);
 
-	g_posLevel = D3DXVECTOR3(SCREEN_WIDTH / 2, 520.0f, 0.0f); //位置を初期化
+	g_posLevel = D3DXVECTOR3(1000.0f, 150.0f, 0.0f); //位置を初期化
 
 	//プレイヤーの取得
 
@@ -362,7 +362,7 @@ void InitLevelText(void)
 
 	D3DXVECTOR3 posLevelText; //レベルの位置
 
-	posLevelText = D3DXVECTOR3(500.0f, 550.0f, 0.0f);
+	posLevelText = D3DXVECTOR3(900.0f, 150.0f, 0.0f);
 
 	LPDIRECT3DDEVICE9 pDevice; //デバイスへのポインタ
 

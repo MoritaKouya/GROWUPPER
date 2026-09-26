@@ -11,9 +11,9 @@
 
 #define NUM_ENERGY_BER (2) //エネルギーバーのテクスチャ数
 
-#define SIZE_ENERGY_X (160)
+#define SIZE_ENERGY_X (100)
 
-#define SIZE_ENERGY_Y (20)
+#define SIZE_ENERGY_Y (15)
 
 //グローバル変数
 
@@ -46,7 +46,7 @@ void InitEnergyBer(void)
 
 		&g_apTextureEnergyBer[1]);
 
-	g_posEnergyBer = D3DXVECTOR3(640.0f, 620.0f, 0.0f); //位置を初期化
+	g_posEnergyBer = D3DXVECTOR3(1150.0f, 150.0f, 0.0f); //位置を初期化
 
 	//プレイヤーの取得
 
@@ -228,11 +228,11 @@ void AddEnergyBer(int nCntEnergy, int nLevel)
 
 	pVtx[4].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X, g_posEnergyBer.y - SIZE_ENERGY_Y, 0.0f);
 
-	pVtx[5].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X + ((SIZE_ENERGY_X * 2) * fBer), g_posEnergyBer.y - 20, 0.0f);
+	pVtx[5].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X + ((SIZE_ENERGY_X * 2) * fBer), g_posEnergyBer.y - SIZE_ENERGY_Y, 0.0f);
 
 	pVtx[6].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X, g_posEnergyBer.y + SIZE_ENERGY_Y, 0.0f);
 
-	pVtx[7].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X + ((SIZE_ENERGY_X* 2) * fBer), g_posEnergyBer.y + 20, 0.0f);
+	pVtx[7].pos = D3DXVECTOR3(g_posEnergyBer.x - SIZE_ENERGY_X + ((SIZE_ENERGY_X* 2) * fBer), g_posEnergyBer.y + SIZE_ENERGY_Y, 0.0f);
 
 	//頂点バッファをアンロックする
 
